@@ -16,9 +16,7 @@ class MerchantRepository
       Merchant.new(row)
     end
   end
-
-
-
+  
   # # private
   #
   # def repo_file_name
