@@ -17,6 +17,8 @@ class MerchantRepository
     end
   end
 
+
+
   # # private
   #
   # def repo_file_name

@@ -16,6 +16,10 @@ module Repository
     records.find{|record| record.id == id}
   end
 
+  def find_by_name(name)
+    records.find{|record| record.name == name}
+  end
+
   def find_all_by_id
   end
 

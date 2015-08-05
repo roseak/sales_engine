@@ -46,5 +46,11 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal 8, merchant_repo.find_by_id(8).id
   end
 
-  
+  def test_can_find_merchant_by_id
+    merchant_repo   = MerchantRepository.new("sales_engine")
+    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
+    expected = "Osinski, Pollich and Koelpin"
+    assert_equal expected, merchant_repo.find_by_name("Osinski, Pollich and Koelpin").name
+  end
+
 end
