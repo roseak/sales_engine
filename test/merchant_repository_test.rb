@@ -80,4 +80,19 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal 2, merchant_repo.find_all_by_name("Williamson Group").length
     assert_equal 0, merchant_repo.find_all_by_name("David and Rose").length
   end
+
+  def test_can_find_all_merchants_by_date_created
+    merchant_repo   = MerchantRepository.new("sales_engine")
+    merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
+    assert_equal 10, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 0, merchant_repo.find_all_by_created_at("2012-04-27 14:53:59 UTC").length
+  end
+
+  def test_can_find_all_merchants_by_date_updated
+    merchant_repo   = MerchantRepository.new("sales_engine")
+    merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
+    assert_equal 8, merchant_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 0, merchant_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
+  end
+
 end

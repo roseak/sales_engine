@@ -36,10 +36,12 @@ module Repository
     records.select{|record| record.name == name}
   end
 
-  def find_all_by_created_at
+  def find_all_by_created_at(created_at)
+    records.select{|record| record.created_at == created_at}
   end
 
-  def find_all_by_updated_at
+  def find_all_by_updated_at(updated_at)
+    records.select{|record| record.updated_at == updated_at}
   end
 
 end
