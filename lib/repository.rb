@@ -31,7 +31,8 @@ module Repository
   def find_all_by_id
   end
 
-  def find_all_by_name
+  def find_all_by_name(name)
+    records.select{|record| record.name == name}
   end
 
   def find_all_by_created_at
