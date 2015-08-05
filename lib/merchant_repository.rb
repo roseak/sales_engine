@@ -7,9 +7,9 @@ class MerchantRepository
 
   include Repository
 
-  # def initialize(sales_engine)
-  #   @sales_engine = sales_engine
-  # end
+  def initialize(sales_engine)
+    @sales_engine = sales_engine
+  end
 
   def read_data(data)
     @records = data.map do |row|
