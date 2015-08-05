@@ -20,16 +20,20 @@ module Repository
     records.find{|record| record.name == name}
   end
 
-  def find_all_by_id
-  end
-
-  def find_by_created_at
-  end
-
-  def find_all_by_created_at
+  def find_by_created_at(created_at)
+    records.find{|record| record.created_at == created_at}
   end
 
   def find_by_updated_at
+  end
+
+  def find_all_by_id
+  end
+
+  def find_all_by_name
+  end
+
+  def find_all_by_created_at
   end
 
   def find_all_by_updated_at
