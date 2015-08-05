@@ -60,4 +60,11 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal expected, merchant_repo.find_by_created_at("2012-03-27 14:53:59 UTC").created_at
   end
 
+  def test_can_find_merchant_by_time_updated
+    merchant_repo   = MerchantRepository.new("sales_engine")
+    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
+    expected = "2012-03-27 14:53:59 UTC"
+    assert_equal expected, merchant_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at
+  end
+
 end
