@@ -1,13 +1,15 @@
 require 'csv'
+require_relative 'file_io'
+# require_relative 'merchant_repository'
 
 module Repository
 
   def all
     records
-
   end
 
   def random
+    records.rand
   end
 
   def find_by_id

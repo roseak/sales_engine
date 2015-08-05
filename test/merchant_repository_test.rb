@@ -12,12 +12,17 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal Merchant, seventh_merchant.class
     assert_equal 7, seventh_merchant.id
     assert_equal "Bernhard-Johns", seventh_merchant.name
-    # assert_equal 7,Bernhard-Johns,2012-03-27 14:53:59 UTC,2012-03-27 14:53:59 UTC
+    assert_equal "2012-03-27 14:53:59 UTC", seventh_merchant.created_at
+    assert_equal "2012-03-27 14:53:59 UTC", seventh_merchant.updated_at
   end
 
-  def test_all_returns_all_instances
+  def test_read_data_returns_all_instances
    merchant_repo = MerchantRepository.new
    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
    assert_equal 100, merchant_repo.all.length
- end
+  end
+
+  def test_
+
+  end
 end
