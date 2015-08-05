@@ -1,7 +1,31 @@
 require 'csv'
 
 module Repository
+
   def all
-    CSV.read "data/#{repo_file_name}", headers: true, header_converters: :symbol
+    records
+
   end
+
+  def random
+  end
+
+  def find_by_id
+  end
+
+  def find_all_by_id
+  end
+
+  def find_by_created_at
+  end
+
+  def find_all_by_created_at
+  end
+
+  def find_by_updated_at
+  end
+
+  def find_all_by_updated_at
+  end
+
 end
