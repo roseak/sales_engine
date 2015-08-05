@@ -67,6 +67,13 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal expected, merchant_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at
   end
 
+  def test_can_find_all_merchants_by_id
+    merchant_repo   = MerchantRepository.new("sales_engine")
+    merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
+    assert_equal 1, merchant_repo.find_all_by_id(2).length
+    assert_equal 0, merchant_repo.find_all_by_id(11).length
+  end
+
   def test_can_find_all_merchants_by_name
     merchant_repo   = MerchantRepository.new("sales_engine")
     merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))

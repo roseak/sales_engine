@@ -28,7 +28,8 @@ module Repository
     records.find{|record| record.updated_at == updated_at}
   end
 
-  def find_all_by_id
+  def find_all_by_id(id)
+    records.select{|record| record.id == id}
   end
 
   def find_all_by_name(name)
