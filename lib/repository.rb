@@ -12,8 +12,8 @@ module Repository
     records.sample
   end
 
-  def find_by_id
-    records.find(|record| record.id == id)
+  def find_by_id(id)
+    records.find{|record| record.id == id}
   end
 
   def find_all_by_id
