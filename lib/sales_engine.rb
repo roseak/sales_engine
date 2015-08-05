@@ -8,15 +8,17 @@ require_relative 'file_io'
 
 class SalesEngine
 
-  attr_reader :merchant_repository, :file_path
+  attr_reader :merchant_repository, :transaction_repository, :file_path
 
   def initialize(file_path = "./data")
     @file_path = file_path
     @merchant_repository = MerchantRepository.new(self)
+    @transaction_repository = TransactionRepository.new(self)
   end
 
   def startup
     merchant_repository.read_data(FileIO.read_csv("#{file_path}/merchants.csv"))
+    transaction_repository.read_data(FileIO.read_csv("#{file_path}/transactions.csv"))
   end
 
 end
