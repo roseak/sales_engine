@@ -8,4 +8,9 @@ class SalesEngineTest < Minitest::Test
     assert_equal MerchantRepository, engine.merchant_repository.class
   end
 
+  def test_customer_repository_exists
+    engine = SalesEngine.new
+    assert_equal CustomerRepository, engine.customer_repository.class
+  end
+
 end
