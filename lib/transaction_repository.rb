@@ -37,4 +37,7 @@ class TransactionRepository
     records.select{|record| record.credit_card_expiration_date == credit_card_expiration_date}
   end
 
+  def find_all_by_result(result)
+    records.select{|record| record.result == result}
+  end
 end

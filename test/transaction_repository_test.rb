@@ -96,6 +96,11 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal [], transaction_repo.find_all_by_credit_card_expiration_date("")
   end
 
+  def test_can_find_all_transactions_by_result
+    assert_equal 10, transaction_repo.find_all_by_result("success").length
+    assert_equal [], transaction_repo.find_all_by_result("failure")
+  end
+
   def test_can_find_all_transactions_by_date_created
     assert_equal 2, transaction_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").length
     assert_equal 0, transaction_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
