@@ -93,19 +93,14 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 10, invoice_repo.find_all_by_status("shipped").length
     assert_equal 0, invoice_repo.find_all_by_status("not shipped").length
   end
-  #
-  # def test_can_find_invoice_item_by_unit_price
-  #   assert_equal 1, invoice_item_repo.find_all_by_unit_price(667.47).length
-  #   assert_equal 0, invoice_item_repo.find_all_by_unit_price(650.00).length
-  # end
-  #
-  # def test_can_find_all_invoice_items_by_date_created
-  #   assert_equal 10, invoice_item_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").length
-  #   assert_equal 0, invoice_item_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
-  # end
-  #
-  # def test_can_find_all_invoice_items_by_date_updated
-  #   assert_equal 10, invoice_item_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
-  #   assert_equal 0, invoice_item_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
-  # end
+
+  def test_can_find_all_invoices_by_date_created
+    assert_equal 1, invoice_repo.find_all_by_created_at("2012-03-25 09:54:09 UTC").length
+    assert_equal 0, invoice_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
+  end
+
+  def test_can_find_all_invoices_by_date_updated
+    assert_equal 1, invoice_repo.find_all_by_updated_at("2012-03-25 09:54:09 UTC").length
+    assert_equal 0, invoice_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
+  end
 end
