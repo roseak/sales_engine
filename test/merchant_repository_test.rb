@@ -79,12 +79,12 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_can_find_all_merchants_by_id
     assert_equal 1, merchant_repo.find_all_by_id(2).length
-    assert_equal [], merchant_repo.find_all_by_id(11)
+    assert_equal 0, merchant_repo.find_all_by_id(11).length
   end
 
   def test_can_find_all_merchants_by_name
     assert_equal 2, merchant_repo.find_all_by_name("Williamson Group").length
-    assert_equal [], merchant_repo.find_all_by_name("David and Rose")
+    assert_equal 0, merchant_repo.find_all_by_name("David and Rose").length
   end
 
   def test_can_find_all_merchants_by_date_created
