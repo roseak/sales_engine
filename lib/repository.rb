@@ -1,6 +1,5 @@
 require 'csv'
 require_relative 'file_io'
-# require_relative 'merchant_repository'
 
 module Repository
 
@@ -17,7 +16,14 @@ module Repository
   end
 
   def find_by_name(name)
-    records.find{|record| record.name == name}
+    if name
+      records.find do |record|
+        return if !record.name
+        record.name.upcase == name.upcase
+      end
+    else
+      nil
+    end
   end
 
   def find_by_created_at(created_at)
