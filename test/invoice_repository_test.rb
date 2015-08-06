@@ -53,8 +53,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_can_find_invoice_by_merchant_id
-    skip
-    assert_equal 1, invoice_repo.find_by_merchant_id(1).merchant_id
+    assert_equal 26, invoice_repo.find_by_merchant_id(26).merchant_id
     assert_equal nil, invoice_repo.find_by_merchant_id(3)
   end
 
@@ -84,7 +83,6 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_invoices_by_merchant_id
-    skip
     assert_equal 1, invoice_repo.find_all_by_merchant_id(33).length
     assert_equal 0, invoice_repo.find_all_by_merchant_id(12).length
   end
