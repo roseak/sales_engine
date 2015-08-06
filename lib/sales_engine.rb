@@ -8,19 +8,31 @@ require_relative 'file_io'
 
 class SalesEngine
 
-  attr_reader :merchant_repository, :transaction_repository, :customer_repository, :file_path
+  attr_reader :merchant_repository,
+              :transaction_repository,
+              :customer_repository,
+              :invoice_item_repository,
+              :item_repository,
+              :invoice_repository,
+              :file_path
 
   def initialize(file_path = "./data")
-    @file_path = file_path
-    @merchant_repository = MerchantRepository.new(self)
-    @customer_repository = CustomerRepository.new(self)
-    @transaction_repository = TransactionRepository.new(self)
+    @file_path               = file_path
+    @merchant_repository     = MerchantRepository.new(self)
+    @customer_repository     = CustomerRepository.new(self)
+    @transaction_repository  = TransactionRepository.new(self)
+    @invoice_item_repository = InvoiceItemRepository.new(self)
+    @item_repository         = ItemRepository.new(self)
+    @invoice_repository      = InvoiceRepository.new(self)
   end
 
   def startup
     merchant_repository.read_data(FileIO.read_csv("#{file_path}/merchants.csv"))
     customer_repository.read_data(FileIO.read_csv("#{file_path}/customers.csv"))
     transaction_repository.read_data(FileIO.read_csv("#{file_path}/transactions.csv"))
+    invoice_item_repository.read_data(FileIO.read_csv("#{file_path}/invoice_items.csv"))
+    item_repository.read_data(FileIO.read_csv("#{file_path}/items.csv"))
+    invoice_repository.read_data(FileIO.read_csv("#{file_path}/invoices.csv"))
   end
 
 end
