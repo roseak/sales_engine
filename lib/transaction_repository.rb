@@ -17,7 +17,7 @@ class TransactionRepository
     end
   end
 
-  def find_by_invoice_id(invoice_id)
-    records.find{|record| record.invoice_id == invoice_id}
+  def find_by_credit_card_number(credit_card_number)
+    records.find{|record| record.credit_card_number == credit_card_number}
   end
 end

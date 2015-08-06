@@ -46,6 +46,15 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 8, transaction_repo.find_by_id(8).id
   end
 
+  def test_can_find_transaction_by_invoice_id
+    assert_equal 4, transaction_repo.find_by_invoice_id(4).invoice_id
+  end
+
+  def test_can_find_transaction_by_credit_card_number
+    expected = "4801647818676136"
+    assert_equal expected, transaction_repo.find_by_credit_card_number(expected).credit_card_number
+  end
+
   def test_can_find_transaction_by_time_created
     expected = "2012-03-27 14:54:10 UTC"
     assert_equal expected, transaction_repo.find_by_created_at("2012-03-27 14:54:10 UTC").created_at
@@ -56,13 +65,14 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal expected, transaction_repo.find_by_updated_at("2012-03-27 14:54:10 UTC").updated_at
   end
 
-  def test_can_find_transaction_by_invoice_id
-    assert_equal 4, transaction_repo.find_by_invoice_id(4).invoice_id
-  end
-
   def test_can_find_all_transactions_by_id
     assert_equal 1, transaction_repo.find_all_by_id(2).length
     assert_equal [], transaction_repo.find_all_by_id(11)
+  end
+
+  def test_can_find_all_transactions_by_invoice_id
+    assert_equal 1, transaction_repo.find_all_by_invoice_id(4).length
+    assert_equal [], transaction_repo.find_all_by_invoice_id(12)
   end
 
   def test_can_find_all_transactions_by_date_created

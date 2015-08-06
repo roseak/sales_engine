@@ -26,6 +26,10 @@ module Repository
     end
   end
 
+  def find_by_invoice_id(invoice_id)
+    records.find{|record| record.invoice_id == invoice_id}
+  end
+
   def find_by_created_at(created_at)
     records.find{|record| record.created_at == created_at}
   end
@@ -40,6 +44,10 @@ module Repository
 
   def find_all_by_name(name)
     records.select{|record| record.name == name}
+  end
+
+  def find_all_by_invoice_id(invoice_id)
+    records.select{|record| record.invoice_id == invoice_id}
   end
 
   def find_all_by_created_at(created_at)
