@@ -64,6 +64,12 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal nil, invoice_item_repo.find_by_quantity(10)
   end
 
+  def test_can_find_invoice_item_by_unit_price
+    skip
+    assert_equal "66747", invoice_item_repo.find_by_unit_price("66747").unit_price
+    assert_equal nil, invoice_item_repo.find_by_unit_price("65000")
+  end
+
   def test_can_find_invoice_item_by_time_created
     expected = "2012-03-27 14:54:09 UTC"
     assert_equal expected, invoice_item_repo.find_by_created_at("2012-03-27 14:54:09 UTC").created_at
@@ -77,6 +83,11 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_can_find_all_invoice_items_by_id
     assert_equal 1, invoice_item_repo.find_all_by_id(2).length
     assert_equal [], invoice_item_repo.find_all_by_id(11)
+  end
+
+  def test_can_find_all_invoice_items_by_item_id
+    assert_equal 1, invoice_item_repo.find_all_by_item_id(530).length
+    assert_equal 0, invoice_item_repo.find_all_by_item_id(1000).length
   end
 
   def test_can_find_all_invoice_items_by_invoice_id

@@ -26,9 +26,11 @@ class InvoiceItemRepository
   end
 
   def find_by_unit_price(unit_price)
+    records.find{|record| record.unit_price == unit_price}
   end
 
   def find_all_by_item_id(item_id)
+    records.select{|record| record.item_id == item_id}
   end
 
   def find_all_by_quantity(quantity)
