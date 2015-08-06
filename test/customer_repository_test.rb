@@ -23,7 +23,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_read_data_returns_all_instances
-    assert_equal 10, customer_repo.all.length
+    assert_equal 11, customer_repo.all.length
   end
 
   def test_all_returns_all_instances_of_customer_class
@@ -46,7 +46,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_nil_when_record_with_id_not_found
-    assert_equal nil, customer_repo.find_by_id(11)
+    assert_equal nil, customer_repo.find_by_id(12)
   end
 
   def test_can_find_customer_by_first_name
@@ -69,59 +69,51 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal expected, customer_repo.find_by_last_name("nader").last_name
   end
 
-  def test_can_find_Customer_by_time_created
-    skip
-    customer_repo   = CustomerRepository.new("sales_engine")
-    customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
-    expected = "2012-03-27 14:53:59 UTC"
-    assert_equal expected, customer_repo.find_by_created_at("2012-03-27 14:53:59 UTC").created_at
+  def test_does_not_return_name_when_only_part_matches
+    expected = nil
+    assert_equal expected, customer_repo.find_by_first_name("Ramon")
   end
 
-  def test_can_find_Customer_by_time_updated
-    skip
-    customer_repo   = CustomerRepository.new("sales_engine")
-    customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
-    expected = "2012-03-27 14:53:59 UTC"
-    assert_equal expected, customer_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at
+  def test_no_first_name
+    assert_equal nil, customer_repo.find_by_first_name(nil)
+  end
+
+  def test_no_last_name
+    assert_equal nil, customer_repo.find_by_last_name(nil)
+  end
+
+  def test_can_find_customer_by_time_created
+    expected = "2012-03-27 14:54:09 UTC"
+    assert_equal expected, customer_repo.find_by_created_at("2012-03-27 14:54:09 UTC").created_at
+  end
+
+  def test_can_find_customer_by_time_updated
+    expected = "2012-03-27 14:54:11 UTC"
+    assert_equal expected, customer_repo.find_by_updated_at("2012-03-27 14:54:11 UTC").updated_at
   end
 
   def test_can_find_all_customers_by_id
-    skip
-    customer_repo   = CustomerRepository.new("sales_engine")
-    customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
     assert_equal 1, customer_repo.find_all_by_id(2).length
-    assert_equal 0, customer_repo.find_all_by_id(11).length
+    assert_equal 0, customer_repo.find_all_by_id(12).length
   end
 
   def test_can_find_all_customers_by_first_name
-    skip
-    customer_repo   = CustomerRepository.new("sales_engine")
-    customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
-    assert_equal 2, customer_repo.find_all_by_name("Williamson Group").length
-    assert_equal 0, customer_repo.find_all_by_name("David and Rose").length
+    assert_equal 2, customer_repo.find_all_by_first_name("Mariah").length
+    assert_equal 0, customer_repo.find_all_by_first_name("David and Rose").length
   end
 
   def test_can_find_all_customers_by_last_name
-    skip
-    customer_repo   = CustomerRepository.new("sales_engine")
-    customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
-    assert_equal 2, customer_repo.find_all_by_name("Williamson Group").length
-    assert_equal 0, customer_repo.find_all_by_name("David and Rose").length
+    assert_equal 2, customer_repo.find_all_by_last_name("Toy").length
+    assert_equal 0, customer_repo.find_all_by_last_name("David and Rose").length
   end
 
   def test_can_find_all_customers_by_date_created
-    skip
-    customer_repo   = CustomerRepository.new("sales_engine")
-    customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
-    assert_equal 10, customer_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 7, customer_repo.find_all_by_created_at("2012-03-27 14:54:10 UTC").length
     assert_equal 0, customer_repo.find_all_by_created_at("2012-04-27 14:53:59 UTC").length
   end
 
   def test_can_find_all_customers_by_date_updated
-    skip
-    customer_repo   = CustomerRepository.new("sales_engine")
-    customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
-    assert_equal 8, customer_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 7, customer_repo.find_all_by_updated_at("2012-03-27 14:54:10 UTC").length
     assert_equal 0, customer_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
   end
 
