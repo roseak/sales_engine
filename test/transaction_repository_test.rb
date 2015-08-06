@@ -18,6 +18,7 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 8, seventh_transaction.invoice_id
     assert_equal "4801647818676136", seventh_transaction.credit_card_number
     assert_equal nil, seventh_transaction.credit_card_expiration_date
+    assert_equal "success", seventh_transaction.result
     assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.created_at
     assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.updated_at
   end
@@ -33,6 +34,7 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 8, seventh_transaction.invoice_id
     assert_equal "4801647818676136", seventh_transaction.credit_card_number
     assert_equal nil, seventh_transaction.credit_card_expiration_date
+    assert_equal "success", seventh_transaction.result
     assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.created_at
     assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.updated_at
   end
@@ -58,6 +60,10 @@ class TransactionRepositoryTest < Minitest::Test
   def test_can_find_transaction_by_credit_card_expiration_date
     assert_equal "0815", transaction_repo.find_by_credit_card_expiration_date("0815").credit_card_expiration_date
     assert_equal nil, transaction_repo.find_by_credit_card_expiration_date("")
+  end
+
+  def test_can_find_transaction_by_result
+    assert_equal "success", transaction_repo.find_by_result("success").result
   end
 
   def test_can_find_transaction_by_time_created
