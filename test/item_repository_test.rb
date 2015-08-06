@@ -107,21 +107,28 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 0, item_repo.find_all_by_name("David and Rose").length
   end
 
-  def test_can_find_all_items_by_last_name
-    skip
-    assert_equal 2, item_repo.find_all_by_last_name("Toy").length
-    assert_equal 0, item_repo.find_all_by_last_name("David and Rose").length
+  def test_can_find_all_items_by_description
+    assert_equal 2, item_repo.find_all_by_description("Sunt eum id eius magni consequuntur delectus veritatis. Quisquam laborum illo ut ab. Ducimus in est id voluptas autem.").length
+    assert_equal 0, item_repo.find_all_by_description("David and Rose").length
+  end
+
+  def test_can_find_all_items_by_unit_price
+    assert_equal 2, item_repo.find_all_by_unit_price(42.91).length
+    assert_equal 0, item_repo.find_all_by_unit_price(7.99).length
+  end
+
+  def test_can_find_all_items_by_merchant_id
+    assert_equal 10, item_repo.find_all_by_merchant_id(1).length
+    assert_equal 0, item_repo.find_all_by_merchant_id(7).length
   end
 
   def test_can_find_all_items_by_date_created
-    skip
-    assert_equal 7, item_repo.find_all_by_created_at("2012-03-27 14:54:10 UTC").length
+    assert_equal 10, item_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, item_repo.find_all_by_created_at("2012-04-27 14:53:59 UTC").length
   end
 
   def test_can_find_all_items_by_date_updated
-    skip
-    assert_equal 7, item_repo.find_all_by_updated_at("2012-03-27 14:54:10 UTC").length
+    assert_equal 10, item_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, item_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
   end
 

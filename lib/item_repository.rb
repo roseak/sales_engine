@@ -28,8 +28,8 @@ class ItemRepository
     end
   end
 
-  def find_all_by_first_name(first_name)
-    records.select{|record| record.first_name == first_name}
+  def find_all_by_description(description)
+    records.select{|record| record.description == description}
   end
 
 end
