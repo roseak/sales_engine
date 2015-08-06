@@ -62,41 +62,37 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal "shipped", invoice_repo.find_by_status("shipped").status
     assert_equal nil, invoice_repo.find_by_status("not shipped")
   end
-  #
-  # def test_can_find_invoice_item_by_unit_price
-  #   assert_equal 667.47, invoice_item_repo.find_by_unit_price(667.47).unit_price
-  #   assert_equal nil, invoice_item_repo.find_by_unit_price(650.00)
-  # end
-  #
-  # def test_can_find_invoice_item_by_time_created
-  #   expected = "2012-03-27 14:54:09 UTC"
-  #   assert_equal expected, invoice_item_repo.find_by_created_at("2012-03-27 14:54:09 UTC").created_at
-  # end
-  #
-  # def test_can_find_invoice_item_by_time_updated
-  #   expected = "2012-03-27 14:54:09 UTC"
-  #   assert_equal expected, invoice_item_repo.find_by_updated_at("2012-03-27 14:54:09 UTC").updated_at
-  # end
-  #
-  # def test_can_find_all_invoice_items_by_id
-  #   assert_equal 1, invoice_item_repo.find_all_by_id(2).length
-  #   assert_equal 0, invoice_item_repo.find_all_by_id(11).length
-  # end
-  #
-  # def test_can_find_all_invoice_items_by_item_id
-  #   assert_equal 1, invoice_item_repo.find_all_by_item_id(530).length
-  #   assert_equal 0, invoice_item_repo.find_all_by_item_id(1000).length
-  # end
-  #
-  # def test_can_find_all_invoice_items_by_invoice_id
-  #   assert_equal 2, invoice_item_repo.find_all_by_invoice_id(2).length
-  #   assert_equal 0, invoice_item_repo.find_all_by_invoice_id(12).length
-  # end
-  #
-  # def test_can_find_all_invoice_items_by_quantity
-  #   assert_equal 2, invoice_item_repo.find_all_by_quantity(5).length
-  #   assert_equal 0, invoice_item_repo.find_all_by_quantity(10).length
-  # end
+
+  def test_can_find_invoice_by_time_created
+    expected = "2012-03-25 09:54:09 UTC"
+    assert_equal expected, invoice_repo.find_by_created_at("2012-03-25 09:54:09 UTC").created_at
+  end
+
+  def test_can_find_invoice_by_time_updated
+    expected = "2012-03-25 09:54:09 UTC"
+    assert_equal expected, invoice_repo.find_by_updated_at("2012-03-25 09:54:09 UTC").updated_at
+  end
+
+  def test_can_find_all_invoices_by_id
+    assert_equal 1, invoice_repo.find_all_by_id(2).length
+    assert_equal 0, invoice_repo.find_all_by_id(11).length
+  end
+
+  def test_can_find_all_invoices_by_customer_id
+    assert_equal 8, invoice_repo.find_all_by_customer_id(1).length
+    assert_equal 0, invoice_repo.find_all_by_customer_id(5).length
+  end
+
+  def test_can_find_all_invoices_by_merchant_id
+    skip
+    assert_equal 1, invoice_repo.find_all_by_merchant_id(33).length
+    assert_equal 0, invoice_repo.find_all_by_merchant_id(12).length
+  end
+
+  def test_can_find_all_invoices_by_status
+    assert_equal 10, invoice_repo.find_all_by_status("shipped").length
+    assert_equal 0, invoice_repo.find_all_by_status("not shipped").length
+  end
   #
   # def test_can_find_invoice_item_by_unit_price
   #   assert_equal 1, invoice_item_repo.find_all_by_unit_price(667.47).length

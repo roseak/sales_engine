@@ -25,4 +25,12 @@ class InvoiceRepository
     records.find{|record| record.status == status}
   end
 
+  def find_all_by_customer_id(customer_id)
+    records.select{|record| record.customer_id == customer_id}
+  end
+
+  def find_all_by_status(status)
+    records.select{|record| record.status == status}
+  end
+
 end
