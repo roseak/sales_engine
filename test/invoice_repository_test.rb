@@ -52,15 +52,16 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal nil, invoice_repo.find_by_customer_id(6)
   end
 
-  # def test_can_find_invoice_item_by_invoice_id
-  #   assert_equal 1, invoice_item_repo.find_by_invoice_id(1).invoice_id
-  #   assert_equal nil, invoice_item_repo.find_by_invoice_id(3)
-  # end
-  #
-  # def test_can_find_invoice_item_by_quantity
-  #   assert_equal 5, invoice_item_repo.find_by_quantity(5).quantity
-  #   assert_equal nil, invoice_item_repo.find_by_quantity(10)
-  # end
+  def test_can_find_invoice_by_merchant_id
+    skip
+    assert_equal 1, invoice_repo.find_by_merchant_id(1).merchant_id
+    assert_equal nil, invoice_repo.find_by_merchant_id(3)
+  end
+
+  def test_can_find_invoice_by_status
+    assert_equal "shipped", invoice_repo.find_by_status("shipped").status
+    assert_equal nil, invoice_repo.find_by_status("not shipped")
+  end
   #
   # def test_can_find_invoice_item_by_unit_price
   #   assert_equal 667.47, invoice_item_repo.find_by_unit_price(667.47).unit_price
