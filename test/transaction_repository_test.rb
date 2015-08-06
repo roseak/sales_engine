@@ -55,6 +55,11 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal expected, transaction_repo.find_by_credit_card_number(expected).credit_card_number
   end
 
+  def test_can_find_transaction_by_credit_card_expiration_date
+    assert_equal "0815", transaction_repo.find_by_credit_card_expiration_date("0815").credit_card_expiration_date
+    assert_equal nil, transaction_repo.find_by_credit_card_expiration_date("")
+  end
+
   def test_can_find_transaction_by_time_created
     expected = "2012-03-27 14:54:10 UTC"
     assert_equal expected, transaction_repo.find_by_created_at("2012-03-27 14:54:10 UTC").created_at
@@ -77,6 +82,12 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_can_find_all_transactions_by_credit_card_number
     assert_equal 1, transaction_repo.find_all_by_credit_card_number("4801647818676136").length
+    assert_equal 0, transaction_repo.find_all_by_created_at("4801647818999136").length
+  end
+
+  def test_can_find_all_transactions_by_credit_card_expiration_date
+    assert_equal 1, transaction_repo.find_all_by_credit_card_expiration_date("0815").length
+    assert_equal [], transaction_repo.find_all_by_credit_card_expiration_date("")
   end
 
   def test_can_find_all_transactions_by_date_created
