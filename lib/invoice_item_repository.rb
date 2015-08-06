@@ -18,6 +18,7 @@ class InvoiceItemRepository
   end
 
   def find_by_item_id(item_id)
+    records.find{|record| record.item_id == item_id}
   end
 
   def find_by_quantity(quantity)

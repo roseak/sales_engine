@@ -46,6 +46,12 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_can_find_invoice_item_by_id
     assert_equal 8, invoice_item_repo.find_by_id(8).id
+    assert_equal nil, invoice_item_repo.find_by_id(12)
+  end
+
+  def test_can_find_invoice_item_by_item_id
+    assert_equal 530, invoice_item_repo.find_by_item_id(530).item_id
+    assert_equal nil, invoice_item_repo.find_by_item_id(1000)
   end
 
   def test_can_find_invoice_item_by_invoice_id
