@@ -4,93 +4,74 @@ require './lib/transaction_repository'
 require './lib/file_io'
 
 class TransactionRepositoryTest < Minitest::Test
+  attr_reader :transaction_repo, :transactions
+
+  def setup
+    @transaction_repo = TransactionRepository.new("sales_engine")
+    @transactions = @transaction_repo.read_data(FileIO.read_csv("./fixtures/transaction_fixture.csv"))
+  end
+
   def test_read_data_returns_transaction_instances
-    transaction_repo    = TransactionRepository.new("sales_engine")
-    transactions = transaction_repo.read_data(FileIO.read_csv("./fixtures/transaction_fixture.csv"))
     seventh_transaction = transactions[6]
     assert_equal Transaction, seventh_transaction.class
     assert_equal 7, seventh_transaction.id
-    assert_equal "8", seventh_transaction.invoice_id
-    assert_equal "2012-03-27 14:53:59 UTC", seventh_transaction.created_at
-    assert_equal "2012-03-27 14:53:59 UTC", seventh_transaction.updated_at
+    assert_equal 8, seventh_transaction.invoice_id
+    assert_equal "4801647818676136", seventh_transaction.credit_card_number
+    assert_equal nil, seventh_transaction.credit_card_expiration_date
+    assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.created_at
+    assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.updated_at
   end
 
   def test_read_data_returns_all_instances
-   merchant_repo = MerchantRepository.new("sales_engine")
-   merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
-   assert_equal 100, merchant_repo.all.length
+   assert_equal 10, transaction_repo.all.length
   end
 
-  def test_all_returns_all_instances_of_merchant_class
-    merchant_repo    = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
-    seventh_merchant = merchant_repo.all[6]
-    assert_equal Merchant, seventh_merchant.class
-    assert_equal 7, seventh_merchant.id
-    assert_equal "Bernhard-Johns", seventh_merchant.name
-    assert_equal "2012-03-27 14:53:59 UTC", seventh_merchant.created_at
-    assert_equal "2012-03-27 14:53:59 UTC", seventh_merchant.updated_at
+  def test_all_returns_all_instances_of_transaction_class
+    seventh_transaction = transaction_repo.all[6]
+    assert_equal Transaction, seventh_transaction.class
+    assert_equal 7, seventh_transaction.id
+    assert_equal 8, seventh_transaction.invoice_id
+    assert_equal "4801647818676136", seventh_transaction.credit_card_number
+    assert_equal nil, seventh_transaction.credit_card_expiration_date
+    assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.created_at
+    assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.updated_at
   end
 
-  def test_random_returns_a_random_merchant_instance
-    merchant_repo    = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
-    merchants = 3.times.map { merchant_repo.random }
-    assert merchants.uniq.length > 1
+  def test_random_returns_a_random_transaction_instance
+    transactions = 3.times.map { transaction_repo.random }
+    assert transactions.uniq.length > 1
   end
 
-  def test_can_find_merchant_by_id
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
-    assert_equal 8, merchant_repo.find_by_id(8).id
+  def test_can_find_transaction_by_id
+    assert_equal 8, transaction_repo.find_by_id(8).id
   end
 
-  def test_can_find_merchant_by_name
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
-    expected = "Osinski, Pollich and Koelpin"
-    assert_equal expected, merchant_repo.find_by_name("Osinski, Pollich and Koelpin").name
+  def test_can_find_transaction_by_time_created
+    expected = "2012-03-27 14:54:10 UTC"
+    assert_equal expected, transaction_repo.find_by_created_at("2012-03-27 14:54:10 UTC").created_at
   end
 
-  def test_can_find_merchant_by_time_created
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
-    expected = "2012-03-27 14:53:59 UTC"
-    assert_equal expected, merchant_repo.find_by_created_at("2012-03-27 14:53:59 UTC").created_at
+  def test_can_find_transaction_by_time_updated
+    expected = "2012-03-27 14:54:10 UTC"
+    assert_equal expected, transaction_repo.find_by_updated_at("2012-03-27 14:54:10 UTC").updated_at
   end
 
-  def test_can_find_merchant_by_time_updated
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./data/merchants.csv"))
-    expected = "2012-03-27 14:53:59 UTC"
-    assert_equal expected, merchant_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at
+  def test_can_find_transaction_by_invoice_id
+    assert_equal 4, transaction_repo.find_by_invoice_id(4).invoice_id
   end
 
-  def test_can_find_all_merchants_by_id
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
-    assert_equal 1, merchant_repo.find_all_by_id(2).length
-    assert_equal 0, merchant_repo.find_all_by_id(11).length
+  def test_can_find_all_transactions_by_id
+    assert_equal 1, transaction_repo.find_all_by_id(2).length
+    assert_equal [], transaction_repo.find_all_by_id(11)
   end
 
-  def test_can_find_all_merchants_by_name
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
-    assert_equal 2, merchant_repo.find_all_by_name("Williamson Group").length
-    assert_equal 0, merchant_repo.find_all_by_name("David and Rose").length
+  def test_can_find_all_transactions_by_date_created
+    assert_equal 2, transaction_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").length
+    assert_equal 0, transaction_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
   end
 
-  def test_can_find_all_merchants_by_date_created
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
-    assert_equal 10, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
-    assert_equal 0, merchant_repo.find_all_by_created_at("2012-04-27 14:53:59 UTC").length
-  end
-
-  def test_can_find_all_merchants_by_date_updated
-    merchant_repo   = MerchantRepository.new("sales_engine")
-    merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
-    assert_equal 8, merchant_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
-    assert_equal 0, merchant_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
+  def test_can_find_all_transactions_by_date_updated
+    assert_equal 2, transaction_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
+    assert_equal 0, transaction_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
   end
 end

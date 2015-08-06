@@ -17,4 +17,7 @@ class TransactionRepository
     end
   end
 
+  def find_by_invoice_id(invoice_id)
+    records.find{|record| record.invoice_id == invoice_id}
+  end
 end

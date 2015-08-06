@@ -4,7 +4,7 @@ class Transaction
 
   def initialize(row)
     @id                          = row[:id].to_i
-    @invoice_id                  = row[:invoice_id]
+    @invoice_id                  = row[:invoice_id].to_i
     @credit_card_number          = row[:credit_card_number]
     @credit_card_expiration_date = row[:credit_card_expiration_date]
     @created_at                  = row[:created_at]
