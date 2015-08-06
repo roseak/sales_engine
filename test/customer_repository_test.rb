@@ -54,9 +54,19 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal expected, customer_repo.find_by_first_name("Dejon").first_name
   end
 
+  def test_can_find_customer_by_first_name_case_insensitive
+    expected = "Dejon"
+    assert_equal expected, customer_repo.find_by_first_name("dejon").first_name
+  end
+
   def test_can_find_customer_by_last_name
     expected = "Toy"
     assert_equal expected, customer_repo.find_by_last_name("Toy").last_name
+  end
+
+  def test_can_find_customer_by_las_name_case_insensitive
+    expected = "Nader"
+    assert_equal expected, customer_repo.find_by_last_name("nader").last_name
   end
 
   def test_can_find_Customer_by_time_created
