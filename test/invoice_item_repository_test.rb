@@ -59,6 +59,11 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal nil, invoice_item_repo.find_by_invoice_id(3)
   end
 
+  def test_can_find_invoice_item_by_quantity
+    assert_equal 5, invoice_item_repo.find_by_quantity(5).quantity
+    assert_equal nil, invoice_item_repo.find_by_quantity(10)
+  end
+
   def test_can_find_invoice_item_by_time_created
     expected = "2012-03-27 14:54:09 UTC"
     assert_equal expected, invoice_item_repo.find_by_created_at("2012-03-27 14:54:09 UTC").created_at
