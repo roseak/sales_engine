@@ -20,4 +20,9 @@ class TransactionRepository
   def find_by_credit_card_number(credit_card_number)
     records.find{|record| record.credit_card_number == credit_card_number}
   end
+
+  def find_all_by_credit_card_number(credit_card_number)
+    records.select{|record| record.credit_card_number == credit_card_number}
+  end
+
 end

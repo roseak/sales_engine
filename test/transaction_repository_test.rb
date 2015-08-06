@@ -75,6 +75,10 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal [], transaction_repo.find_all_by_invoice_id(12)
   end
 
+  def test_can_find_all_transactions_by_credit_card_number
+    assert_equal 1, transaction_repo.find_all_by_credit_card_number("4801647818676136").length
+  end
+
   def test_can_find_all_transactions_by_date_created
     assert_equal 2, transaction_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").length
     assert_equal 0, transaction_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
