@@ -17,10 +17,12 @@ class CustomerRepository
     end
   end
 
-  # def find_by_first_name(first_name)
-  #   records.find{|record| record.first_name == first_name}
-  # end
+  def find_by_first_name(first_name)
+    records.find{|record| record.first_name.upcase == first_name.upcase}
+  end
 
-
+  def find_by_last_name(last_name)
+    records.find{|record| record.last_name.upcase == last_name.upcase}
+  end
 
 end
