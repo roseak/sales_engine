@@ -30,6 +30,10 @@ module Repository
     records.find{|record| record.invoice_id == invoice_id}
   end
 
+  def find_by_merchant_id(merchant_id)
+    records.find{|record| record.merchant_id == merchant_id}
+  end
+
   def find_by_unit_price(unit_price)
     records.find{|record| record.unit_price == unit_price}
   end
@@ -52,6 +56,10 @@ module Repository
 
   def find_all_by_invoice_id(invoice_id)
     records.select{|record| record.invoice_id == invoice_id}
+  end
+
+  def find_all_by_merchant_id(merchant_id)
+    records.select{|record| record.merchant_id == merchant_id}
   end
 
   def find_all_by_unit_price(unit_price)
