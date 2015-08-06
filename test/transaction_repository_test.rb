@@ -8,7 +8,7 @@ class TransactionRepositoryTest < Minitest::Test
 
   def setup
     @transaction_repo = TransactionRepository.new("sales_engine")
-    @transactions = @transaction_repo.read_data(FileIO.read_csv("./fixtures/transaction_fixture.csv"))
+    @transactions = @transaction_repo.read_data(FileIO.read_csv("./fixtures/transactions.csv"))
   end
 
   def test_read_data_returns_transaction_instances

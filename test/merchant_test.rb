@@ -17,9 +17,14 @@ class MerchantTest < Minitest::Test
 
   def test_it_returns_a_collection_of_items_associated_with_merchant_id
     merchant = merchant_repo.find_by_id(1)
-    items = merchant.items
+    items    = merchant.items
     assert_equal 10, items.count
   end
 
+  def test_it_returns_a_collection_of_invoices_associated_with_merchant_id
+    merchant = merchant_repo.find_by_id(1)
+    invoices = merchant.invoices
+    assert_equal 2, invoices.count
+  end
 
 end

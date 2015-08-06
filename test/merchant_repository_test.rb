@@ -8,7 +8,7 @@ class MerchantRepositoryTest < Minitest::Test
 
   def setup
     @merchant_repo = MerchantRepository.new("sales_engine")
-    @merchants = @merchant_repo.read_data(FileIO.read_csv("./fixtures/merchant_fixture.csv"))
+    @merchants = @merchant_repo.read_data(FileIO.read_csv("./fixtures/merchants.csv"))
   end
 
   def test_read_data_returns_merchant_instances

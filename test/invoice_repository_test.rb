@@ -8,7 +8,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def setup
     @invoice_repo = InvoiceRepository.new("sales_engine")
-    @invoices = @invoice_repo.read_data(FileIO.read_csv("./fixtures/invoice_fixture.csv"))
+    @invoices = @invoice_repo.read_data(FileIO.read_csv("./fixtures/invoices.csv"))
   end
 
   def test_read_data_returns_invoice_instances

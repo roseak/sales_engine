@@ -9,7 +9,7 @@ class CustomerRepositoryTest < Minitest::Test
 
   def setup
     @customer_repo = CustomerRepository.new("sales_engine")
-    @customers     = @customer_repo.read_data(FileIO.read_csv("./fixtures/customer_fixture.csv"))
+    @customers     = @customer_repo.read_data(FileIO.read_csv("./fixtures/customers.csv"))
   end
 
   def test_read_data_returns_customer_instances

@@ -9,7 +9,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def setup
     @item_repo = ItemRepository.new("sales_engine")
-    @items     = @item_repo.read_data(FileIO.read_csv("./fixtures/item_fixture.csv"))
+    @items     = @item_repo.read_data(FileIO.read_csv("./fixtures/items.csv"))
   end
 
   def test_read_data_returns_item_instances

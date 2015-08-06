@@ -17,7 +17,7 @@ class SalesEngine
               :file_path
 
   def initialize(file_path = "./data")
-    @file_path               = file_path
+    @file_path                 = file_path
     @merchant_repository     ||= MerchantRepository.new(self)
     @customer_repository     ||= CustomerRepository.new(self)
     @transaction_repository  ||= TransactionRepository.new(self)
@@ -37,6 +37,10 @@ class SalesEngine
 
   def find_items_by_merchant_id(merchant_id)
     item_repository.find_all_by_merchant_id(merchant_id)
+  end
+
+  def find_invoices_by_merchant_id(merchant_id)
+    invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
 end
