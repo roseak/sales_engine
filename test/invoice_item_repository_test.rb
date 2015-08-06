@@ -26,88 +26,60 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_read_data_returns_all_instances
    assert_equal 10, invoice_item_repo.all.length
   end
-  #
-  # def test_all_returns_all_instances_of_transaction_class
-  #   seventh_transaction = transaction_repo.all[6]
-  #   assert_equal Transaction, seventh_transaction.class
-  #   assert_equal 7, seventh_transaction.id
-  #   assert_equal 8, seventh_transaction.invoice_id
-  #   assert_equal "4801647818676136", seventh_transaction.credit_card_number
-  #   assert_equal nil, seventh_transaction.credit_card_expiration_date
-  #   assert_equal "success", seventh_transaction.result
-  #   assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.created_at
-  #   assert_equal "2012-03-27 14:54:10 UTC", seventh_transaction.updated_at
-  # end
-  #
-  # def test_random_returns_a_random_transaction_instance
-  #   transactions = 3.times.map { transaction_repo.random }
-  #   assert transactions.uniq.length > 1
-  # end
-  #
-  # def test_can_find_transaction_by_id
-  #   assert_equal 8, transaction_repo.find_by_id(8).id
-  # end
-  #
-  # def test_can_find_transaction_by_invoice_id
-  #   assert_equal 4, transaction_repo.find_by_invoice_id(4).invoice_id
-  # end
-  #
-  # def test_can_find_transaction_by_credit_card_number
-  #   expected = "4801647818676136"
-  #   assert_equal expected, transaction_repo.find_by_credit_card_number(expected).credit_card_number
-  # end
-  #
-  # def test_can_find_transaction_by_credit_card_expiration_date
-  #   assert_equal "0815", transaction_repo.find_by_credit_card_expiration_date("0815").credit_card_expiration_date
-  #   assert_equal nil, transaction_repo.find_by_credit_card_expiration_date("")
-  # end
-  #
-  # def test_can_find_transaction_by_result
-  #   assert_equal "success", transaction_repo.find_by_result("success").result
-  # end
-  #
-  # def test_can_find_transaction_by_time_created
-  #   expected = "2012-03-27 14:54:10 UTC"
-  #   assert_equal expected, transaction_repo.find_by_created_at("2012-03-27 14:54:10 UTC").created_at
-  # end
-  #
-  # def test_can_find_transaction_by_time_updated
-  #   expected = "2012-03-27 14:54:10 UTC"
-  #   assert_equal expected, transaction_repo.find_by_updated_at("2012-03-27 14:54:10 UTC").updated_at
-  # end
-  #
-  # def test_can_find_all_transactions_by_id
-  #   assert_equal 1, transaction_repo.find_all_by_id(2).length
-  #   assert_equal [], transaction_repo.find_all_by_id(11)
-  # end
-  #
-  # def test_can_find_all_transactions_by_invoice_id
-  #   assert_equal 1, transaction_repo.find_all_by_invoice_id(4).length
-  #   assert_equal [], transaction_repo.find_all_by_invoice_id(12)
-  # end
-  #
-  # def test_can_find_all_transactions_by_credit_card_number
-  #   assert_equal 1, transaction_repo.find_all_by_credit_card_number("4801647818676136").length
-  #   assert_equal 0, transaction_repo.find_all_by_created_at("4801647818999136").length
-  # end
-  #
-  # def test_can_find_all_transactions_by_credit_card_expiration_date
-  #   assert_equal 1, transaction_repo.find_all_by_credit_card_expiration_date("0815").length
-  #   assert_equal [], transaction_repo.find_all_by_credit_card_expiration_date("")
-  # end
-  #
-  # def test_can_find_all_transactions_by_result
-  #   assert_equal 10, transaction_repo.find_all_by_result("success").length
-  #   assert_equal [], transaction_repo.find_all_by_result("failure")
-  # end
-  #
-  # def test_can_find_all_transactions_by_date_created
-  #   assert_equal 2, transaction_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").length
-  #   assert_equal 0, transaction_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
-  # end
-  #
-  # def test_can_find_all_transactions_by_date_updated
-  #   assert_equal 2, transaction_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
-  #   assert_equal 0, transaction_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
-  # end
+
+  def test_all_returns_all_instances_of_invoice_item_class
+    seventh_invoice_item = invoice_item_repo.all[6]
+    assert_equal InvoiceItem, seventh_invoice_item.class
+    assert_equal 7, seventh_invoice_item.id
+    assert_equal 530, seventh_invoice_item.item_id
+    assert_equal 1, seventh_invoice_item.invoice_id
+    assert_equal 4, seventh_invoice_item.quantity
+    assert_equal "66747", seventh_invoice_item.unit_price
+    assert_equal "2012-03-27 14:54:09 UTC", seventh_invoice_item.created_at
+    assert_equal "2012-03-27 14:54:09 UTC", seventh_invoice_item.updated_at
+  end
+
+  def test_random_returns_a_random_invoice_item_instance
+    invoice_items = 3.times.map { invoice_item_repo.random }
+    assert invoice_items.uniq.length > 1
+  end
+
+  def test_can_find_invoice_item_by_id
+    assert_equal 8, invoice_item_repo.find_by_id(8).id
+  end
+
+  def test_can_find_invoice_item_by_invoice_id
+    assert_equal 1, invoice_item_repo.find_by_invoice_id(1).invoice_id
+    assert_equal nil, invoice_item_repo.find_by_invoice_id(3)
+  end
+
+  def test_can_find_invoice_item_by_time_created
+    expected = "2012-03-27 14:54:09 UTC"
+    assert_equal expected, invoice_item_repo.find_by_created_at("2012-03-27 14:54:09 UTC").created_at
+  end
+
+  def test_can_find_invoice_item_by_time_updated
+    expected = "2012-03-27 14:54:09 UTC"
+    assert_equal expected, invoice_item_repo.find_by_updated_at("2012-03-27 14:54:09 UTC").updated_at
+  end
+
+  def test_can_find_all_invoice_items_by_id
+    assert_equal 1, invoice_item_repo.find_all_by_id(2).length
+    assert_equal [], invoice_item_repo.find_all_by_id(11)
+  end
+
+  def test_can_find_all_invoice_items_by_invoice_id
+    assert_equal 2, invoice_item_repo.find_all_by_invoice_id(2).length
+    assert_equal [], invoice_item_repo.find_all_by_invoice_id(12)
+  end
+
+  def test_can_find_all_invoice_items_by_date_created
+    assert_equal 10, invoice_item_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").length
+    assert_equal 0, invoice_item_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
+  end
+
+  def test_can_find_all_invoice_items_by_date_updated
+    assert_equal 10, invoice_item_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
+    assert_equal 0, invoice_item_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
+  end
 end
