@@ -22,10 +22,10 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal "2012-03-27 14:54:09 UTC", seventh_invoice_item.created_at
     assert_equal "2012-03-27 14:54:09 UTC", seventh_invoice_item.updated_at
   end
-  #
-  # def test_read_data_returns_all_instances
-  #  assert_equal 10, transaction_repo.all.length
-  # end
+
+  def test_read_data_returns_all_instances
+   assert_equal 10, invoice_item_repo.all.length
+  end
   #
   # def test_all_returns_all_instances_of_transaction_class
   #   seventh_transaction = transaction_repo.all[6]
