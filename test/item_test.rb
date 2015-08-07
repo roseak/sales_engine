@@ -20,4 +20,10 @@ class ItemTest < Minitest::Test
     invoice_items = item.invoice_items
     assert_equal 1, invoice_items.count
   end
+
+  def test_it_returns_an_instance_of_merchant_associated_with_item_id
+    item          = item_repo.find_by_id(1)
+    merchant      = item.merchant
+    assert_equal "Schroeder-Jerde", merchant.name
+  end
 end

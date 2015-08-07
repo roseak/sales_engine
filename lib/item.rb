@@ -26,4 +26,8 @@ class Item
     repository.find_invoice_items_by_item_id(id)
   end
 
+  def merchant
+    repository.find_merchant_by_merchant_id(merchant_id)
+  end
+
 end
