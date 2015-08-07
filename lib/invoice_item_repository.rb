@@ -2,7 +2,6 @@ require_relative 'invoice_item'
 require_relative 'repository'
 
 class InvoiceItemRepository
-
   attr_reader :sales_engine, :records
 
   include Repository
@@ -13,7 +12,7 @@ class InvoiceItemRepository
 
   def read_data(data)
     @records = data.map do |row|
-      InvoiceItem.new(row)
+      InvoiceItem.new(row, self)
     end
   end
 
@@ -33,4 +32,11 @@ class InvoiceItemRepository
     records.select{|record| record.quantity == quantity}
   end
 
+  def find_invoice_by_invoice_id(invoice_id)
+    sales_engine.find_invoice_by_invoice_id(invoice_id)
+  end
+
+  def find_item_by_item_id(item_id)
+    sales_engine.find_item_by_item_id(item_id)
+  end
 end

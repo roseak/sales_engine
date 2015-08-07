@@ -39,4 +39,10 @@ class InvoiceTest < Minitest::Test
     customer = invoice.customer
     assert_equal "Cecelia", customer.first_name
   end
+
+  def test_invoice_returns_an_instance_of_merchant
+    invoice  = invoice_repo.find_by_id(9)
+    merchant = invoice.merchant
+    assert_equal "Schroeder-Jerde", merchant.name
+  end
 end
