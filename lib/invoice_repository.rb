@@ -32,7 +32,19 @@ class InvoiceRepository
     records.select{|record| record.status == status}
   end
 
-  def find_transactions_by_invoice_id(transaction_id)
-    sales_engine.find_transactions_by_invoice_id(transaction_id)
+  def find_transactions_by_invoice_id(invoice_id)
+    sales_engine.find_transactions_by_invoice_id(invoice_id)
+  end
+
+  def find_invoice_items_by_invoice_id(invoice_id)
+    sales_engine.find_invoice_items_by_invoice_id(invoice_id)
+  end
+
+  def find_items_by_invoice_id(invoice_id)
+    sales_engine.find_items_by_invoice_id(invoice_id)
+  end
+
+  def find_customer_by_customer_id(customer_id)
+    sales_engine.find_customer_by_customer_id(customer_id)
   end
 end
