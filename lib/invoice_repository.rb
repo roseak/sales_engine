@@ -2,7 +2,6 @@ require_relative 'invoice'
 require_relative 'repository'
 
 class InvoiceRepository
-
   attr_reader :sales_engine, :records
 
   include Repository
@@ -13,7 +12,7 @@ class InvoiceRepository
 
   def read_data(data)
     @records = data.map do |row|
-      Invoice.new(row)
+      Invoice.new(row, self)
     end
   end
 
@@ -33,4 +32,7 @@ class InvoiceRepository
     records.select{|record| record.status == status}
   end
 
+  def find_transactions_by_invoice_id(transaction_id)
+    sales_engine.find_transactions_by_invoice_id(transaction_id)
+  end
 end
