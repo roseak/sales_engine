@@ -13,7 +13,7 @@ class ItemRepository
 
   def read_data(data)
     @records = data.map do |row|
-      Item.new(row)
+      Item.new(row, self)
     end
   end
 
@@ -32,6 +32,7 @@ class ItemRepository
     records.select{|record| record.description == description}
   end
 
-  
-
+  def find_invoice_items_by_item_id(item_id)
+    sales_engine.find_invoice_items_by_item_id(item_id)
+  end
 end
