@@ -4,7 +4,6 @@ require './lib/item_repository'
 require './lib/file_io'
 
 class ItemRepositoryTest < Minitest::Test
-
   attr_reader :item_repo, :items
 
   def setup
@@ -46,7 +45,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_can_find_item_by_id
-    assert_equal 8, item_repo.find_by_id(8).id
+    assert_equal 9, item_repo.find_by_id(9).id
   end
 
   def test_returns_nil_when_record_with_id_not_found
@@ -131,8 +130,4 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 10, item_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, item_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
   end
-
 end
-
-
-parent = Minitest::Mock.new

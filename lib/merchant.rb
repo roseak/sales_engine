@@ -1,5 +1,4 @@
 class Merchant
-
   attr_reader :id,
               :name,
               :created_at,
@@ -21,6 +20,4 @@ class Merchant
   def invoices
     repository.find_invoices_by_merchant_id(id)
   end
-
-
 end

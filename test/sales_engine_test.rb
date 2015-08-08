@@ -32,7 +32,4 @@ class SalesEngineTest < Minitest::Test
   def test_invoice_repository_exists
     assert_equal InvoiceRepository, engine.invoice_repository.class
   end
-
-
-
 end

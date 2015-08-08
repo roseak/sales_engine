@@ -96,5 +96,4 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal 8, merchant_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, merchant_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
   end
-
 end

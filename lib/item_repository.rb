@@ -2,7 +2,6 @@ require_relative 'item'
 require_relative 'repository'
 
 class ItemRepository
-
   attr_reader :sales_engine, :records
 
   include Repository

@@ -6,7 +6,6 @@ require './lib/sales_engine'
 require './lib/file_io'
 
 class InvoiceItemTest < Minitest::Test
-
   attr_reader :invoice_item_repo
 
   def setup

@@ -2,7 +2,6 @@ require_relative 'customer'
 require_relative 'repository'
 
 class CustomerRepository
-
   attr_reader :sales_engine, :records
 
   include Repository

@@ -1,5 +1,4 @@
 class Customer
-
   attr_reader :id,
               :first_name,
               :last_name,
@@ -19,5 +18,4 @@ class Customer
   def invoices
     repository.find_invoices_by_customer_id(id)
   end
-
 end

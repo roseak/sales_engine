@@ -2,7 +2,6 @@ require 'csv'
 require_relative 'file_io'
 
 module Repository
-
   def all
     records
   end
@@ -73,5 +72,4 @@ module Repository
   def find_all_by_updated_at(updated_at)
     records.select{|record| record.updated_at == updated_at}
   end
-
 end

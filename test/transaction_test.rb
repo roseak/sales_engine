@@ -6,7 +6,6 @@ require './lib/sales_engine'
 require './lib/file_io'
 
 class TransactionTest < Minitest::Test
-
   attr_reader :transaction_repo
 
   def setup

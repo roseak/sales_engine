@@ -116,5 +116,4 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal 7, customer_repo.find_all_by_updated_at("2012-03-27 14:54:10 UTC").length
     assert_equal 0, customer_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
   end
-
 end

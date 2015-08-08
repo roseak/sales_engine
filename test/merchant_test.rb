@@ -6,7 +6,6 @@ require './lib/sales_engine'
 require './lib/file_io'
 
 class MerchantTest < Minitest::Test
-
   attr_reader :merchant_repo
 
   def setup
@@ -26,5 +25,4 @@ class MerchantTest < Minitest::Test
     invoices = merchant.invoices
     assert_equal 2, invoices.count
   end
-
 end
