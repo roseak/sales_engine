@@ -27,7 +27,7 @@ class Invoice
   end
 
   def items
-    repository.find_items_by_invoice_id(id)
+    invoice_items.map {|invoice_item| invoice_item.item}
   end
 
   def customer

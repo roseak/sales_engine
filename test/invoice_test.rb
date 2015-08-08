@@ -28,10 +28,9 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_returns_a_collection_of_items_associated_with_invoice_id
-    skip
     invoice = invoice_repo.find_by_id(3)
     items   = invoice.items
-    assert_equal 0, items.count
+    assert_equal 2, items.count
   end
 
   def test_it_returns_an_instance_of_customer_associated_with_customer_id
