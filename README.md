@@ -1,6 +1,6 @@
 ## Sales Engine
 
-This project was done using Ruby as part of Module 1 for the Turing School of Software and Design with David Stinnette. The purpose of this project was to create a data reporting tool that manipulates and reports on merchant transactional data, somewhat similar to ActiveRecord.
+This project was done using Ruby as part of Module 1 for the [Turing School of Software and Design](http://turing.io/) with [David Stinnette](https://github.com/dastinnette). The purpose of this project was to create a data reporting tool that manipulates and reports on merchant transactional data, somewhat similar to ActiveRecord.
 
 ###Project Goals
 
@@ -12,3 +12,5 @@ This project was done using Ruby as part of Module 1 for the Turing School of So
 * Use memoization to improve performance
 
 The challenge of this project was understanding how the different components of the structure fit together, figuring out out how to access the different attributes associated with the different branches of the system in a clear and concise way.
+
+The project outline can be found [here](https://github.com/turingschool/curriculum/blob/master/source/projects/sales_engine.markdown).
