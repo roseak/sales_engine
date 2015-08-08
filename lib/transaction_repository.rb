@@ -13,7 +13,7 @@ class TransactionRepository
 
   def read_data(data)
     @records = data.map do |row|
-      Transaction.new(row)
+      Transaction.new(row, self)
     end
   end
 
@@ -39,5 +39,9 @@ class TransactionRepository
 
   def find_all_by_result(result)
     records.select{|record| record.result == result}
+  end
+
+  def find_invoice_by_invoice_id(invoice_id)
+    sales_engine.find_invoice_by_invoice_id(invoice_id)
   end
 end
