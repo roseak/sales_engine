@@ -13,7 +13,7 @@ class CustomerRepository
 
   def read_data(data)
     @records = data.map do |row|
-      Customer.new(row)
+      Customer.new(row, self)
     end
   end
 
@@ -45,5 +45,9 @@ class CustomerRepository
 
   def find_all_by_last_name(last_name)
     records.select{|record| record.last_name.upcase == last_name.upcase}
+  end
+
+  def find_invoices_by_customer_id(customer_id)
+    sales_engine.find_invoices_by_customer_id(customer_id)
   end
 end
