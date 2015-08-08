@@ -5,6 +5,7 @@ require_relative 'invoice_repository'
 require_relative 'invoice_item_repository'
 require_relative 'customer_repository'
 require_relative 'file_io'
+require 'time'
 
 class SalesEngine
 
@@ -24,6 +25,12 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self)
     @item_repository         ||= ItemRepository.new(self)
     @invoice_repository      ||= InvoiceRepository.new(self)
+  end
+
+  def self.build(*args)
+    engine = new(*args)
+    engine.startup
+    engine
   end
 
   def startup

@@ -17,6 +17,6 @@ class CustomerTest < Minitest::Test
   def test_it_returns_a_collection_of_invoice_instances_with_customer_id
     customer = customer_repo.find_by_id(1)
     invoices = customer.invoices
-    assert_equal 8, invoices.count
+    assert_equal 11, invoices.count
   end
 end

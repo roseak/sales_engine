@@ -5,7 +5,7 @@ class Merchant
               :updated_at,
               :repository
 
-  def initialize(row, repository)
+  def initialize(row, repository = nil)
     @id         = row[:id].to_i
     @name       = row[:name]
     @created_at = row[:created_at]
@@ -19,5 +19,19 @@ class Merchant
 
   def invoices
     repository.find_invoices_by_merchant_id(id)
+  end
+
+  def revenue(date = nil)
+    successful_invoices_on_date(date).map(&:revenue).reduce(0, :+)
+  end
+
+  private
+
+  def successful_invoices_on_date(date)
+    result = invoices.select(&:successful?)
+    if date
+      result.select! { |invoice| invoice.on_date?(date) }
+    end
+    result
   end
 end
