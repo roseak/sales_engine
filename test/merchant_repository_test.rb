@@ -21,7 +21,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_read_data_returns_all_instances
-   assert_equal 10, merchant_repo.all.length
+   assert_equal 11, merchant_repo.all.length
   end
 
   def test_all_returns_all_instances_of_merchant_class
@@ -43,7 +43,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_returns_nil_when_record_with_id_not_found
-    assert_equal nil, merchant_repo.find_by_id(11)
+    assert_equal nil, merchant_repo.find_by_id(19)
   end
 
   #TODO: repeat assertions for repo methods that are sad paths
@@ -79,7 +79,7 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_can_find_all_merchants_by_id
     assert_equal 1, merchant_repo.find_all_by_id(2).length
-    assert_equal 0, merchant_repo.find_all_by_id(11).length
+    assert_equal 0, merchant_repo.find_all_by_id(19).length
   end
 
   def test_can_find_all_merchants_by_name
@@ -88,12 +88,12 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_merchants_by_date_created
-    assert_equal 10, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 11, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, merchant_repo.find_all_by_created_at("2012-04-27 14:53:59 UTC").length
   end
 
   def test_can_find_all_merchants_by_date_updated
-    assert_equal 8, merchant_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 9, merchant_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, merchant_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
   end
 end

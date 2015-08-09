@@ -53,4 +53,15 @@ class MerchantTest < Minitest::Test
     merchant = merchant_repo.find_by_id(1)
     assert_equal "Ondricka", merchant.favorite_customer.last_name
   end
+
+  def test_can_return_collection_of_customers_with_pending_invoices
+    merchant = merchant_repo.find_by_id(11)
+    assert_equal 1, merchant.customers_with_pending_invoices.length
+  end
+
+  def test_customer_does_not_have_pending_invoices_if_all_transactions_are_not_unsuccessful
+    skip
+    merchant = merchant_repo.find_by_id(11)
+    assert_equal nil, merchant.customers_with_pending_invoices
+  end
 end

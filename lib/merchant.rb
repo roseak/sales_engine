@@ -27,13 +27,22 @@ class Merchant
 
   def favorite_customer
     successful_invoices = invoices.select(&:successful?)
-    totalled_invoices = successful_invoices.group_by do |invoice|
+    totaled_invoices = successful_invoices.group_by do |invoice|
       invoice.customer_id
     end
-    favorite_customer_id = totalled_invoices.max_by do |k, v|
+    favorite_customer_id = totaled_invoices.max_by do |k, v|
       v.count
     end
     repository.find_customer_by_customer_id(favorite_customer_id[0])
+  end
+
+  def customers_with_pending_invoices
+    pending_invoices = invoices.select do |invoice|
+      invoice.successful? == false
+    end
+    deadbeat_customers = pending_invoices.map do |invoice|
+      invoice.customer_id
+    end
   end
 
   private  # => Merchant
