@@ -1,9 +1,9 @@
 class Merchant
-  attr_reader :id,          # => :id
-              :name,        # => :name
-              :created_at,  # => :created_at
-              :updated_at,  # => :updated_at
-              :repository   # => nil
+  attr_reader :id,
+              :name,
+              :created_at,
+              :updated_at,
+              :repository
 
   def initialize(row, repository = nil)
     @id         = row[:id].to_i
@@ -45,7 +45,7 @@ class Merchant
     end
   end
 
-  private  # => Merchant
+  private
 
   def successful_invoices_on_date(date)
     result = invoices.select(&:successful?)

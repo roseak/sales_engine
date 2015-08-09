@@ -43,7 +43,7 @@ class MerchantTest < Minitest::Test
     assert_equal BigDecimal("5"), merchant.revenue
   end
 
-  def test_revenue_can_filter_by_date
+  def test_revenue_can_filtered_by_date
     merchant = merchant_repo.find_by_id(1)
     date = Date.new(2012, 3, 7)
     assert_equal BigDecimal("751.07"), merchant.revenue(date)
