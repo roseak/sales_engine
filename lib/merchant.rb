@@ -1,9 +1,9 @@
 class Merchant
-  attr_reader :id,
-              :name,
-              :created_at,
-              :updated_at,
-              :repository
+  attr_reader :id,          # => :id
+              :name,        # => :name
+              :created_at,  # => :created_at
+              :updated_at,  # => :updated_at
+              :repository   # => nil
 
   def initialize(row, repository = nil)
     @id         = row[:id].to_i
@@ -25,7 +25,18 @@ class Merchant
     successful_invoices_on_date(date).map(&:revenue).reduce(0, :+)
   end
 
-  private
+  def favorite_customer
+    successful_invoices = invoices.select(&:successful?)
+    totalled_invoices = successful_invoices.group_by do |invoice|
+      invoice.customer_id
+    end
+    favorite_customer_id = totalled_invoices.max_by do |k, v|
+      v.count
+    end
+    repository.find_customer_by_customer_id(favorite_customer_id[0])
+  end
+
+  private  # => Merchant
 
   def successful_invoices_on_date(date)
     result = invoices.select(&:successful?)

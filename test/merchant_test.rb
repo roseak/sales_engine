@@ -23,7 +23,7 @@ class MerchantTest < Minitest::Test
   def test_it_returns_a_collection_of_invoices_associated_with_merchant_id
     merchant = merchant_repo.find_by_id(1)
     invoices = merchant.invoices
-    assert_equal 2, invoices.count
+    assert_equal 3, invoices.count
   end
 
   def test_revenue_returns_total_revenue_for_merchant
@@ -47,5 +47,10 @@ class MerchantTest < Minitest::Test
     merchant = merchant_repo.find_by_id(1)
     date = Date.new(2012, 3, 7)
     assert_equal BigDecimal("751.07"), merchant.revenue(date)
+  end
+
+  def test_favorite_customer_returns_the_customer_with_the_most_successful_transactions
+    merchant = merchant_repo.find_by_id(1)
+    assert_equal "Ondricka", merchant.favorite_customer.last_name
   end
 end
