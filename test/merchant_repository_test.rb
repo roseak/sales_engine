@@ -105,6 +105,11 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal [1, 2, 4], merchant_repo.most_revenue(x).map(&:id)
   end
 
+  def test_can_find_top_merchants_by_items_sold
+    x = 3
+    assert_equal [1, 2, 4], merchant_repo.most_items(x).map(&:id)
+  end
+
   def test_can_find_total_revenue_for_date_across_all_merchants
     date = Date.new(2012, 3, 7)
     assert_equal [BigDecimal("751.07"), BigDecimal("720.76"), 0, 0, 0, 0, 0, 0, 0, 0, 0], merchant_repo.revenue(date)

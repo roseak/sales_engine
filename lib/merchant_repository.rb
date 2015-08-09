@@ -35,6 +35,13 @@ class MerchantRepository
     rank_merchants.reverse[0..(x-1)]
   end
 
+  def most_items(x)
+    rank_merchants = records.sort_by do |merchant|
+      merchant.total_items
+    end
+    rank_merchants.reverse[0..(x-1)]
+  end
+
   def revenue(date)
     records.map do |merchant|
       merchant.revenue(date)

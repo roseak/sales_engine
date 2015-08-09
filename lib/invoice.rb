@@ -41,6 +41,10 @@ class Invoice
     invoice_items.map(&:revenue).reduce(0, :+)
   end
 
+  def total_items
+    invoice_items.map(&:quantity).reduce(0, :+)
+  end
+
   def successful?
     transactions.any?(&:successful?)
   end

@@ -25,6 +25,10 @@ class Merchant
     successful_invoices_on_date(date).map(&:revenue).reduce(0, :+)
   end
 
+  def total_items
+    invoices.map(&:total_items).reduce(0, :+)
+  end
+
   def favorite_customer
     successful_invoices = invoices.select(&:successful?)
     totaled_invoices = successful_invoices.group_by do |invoice|
