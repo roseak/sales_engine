@@ -91,7 +91,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_merchants_by_date_created
-    assert_equal 11, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 9, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, merchant_repo.find_all_by_created_at("2012-04-27 14:53:59 UTC").length
   end
 
@@ -103,5 +103,10 @@ class MerchantRepositoryTest < Minitest::Test
   def test_can_find_top_merchants_by_total_revenue
     x = 3
     assert_equal [1, 2, 4], merchant_repo.most_revenue(x).map(&:id)
+  end
+
+  def test_can_find_total_revenue_for_date_across_all_merchants
+    date = Date.new(2012, 3, 7)
+    assert_equal [BigDecimal("751.07"), BigDecimal("720.76"), 0, 0, 0, 0, 0, 0, 0, 0, 0], merchant_repo.revenue(date)
   end
 end

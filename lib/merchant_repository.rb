@@ -34,4 +34,10 @@ class MerchantRepository
     end
     rank_merchants.reverse[0..(x-1)]
   end
+
+  def revenue(date)
+    records.map do |merchant|
+      merchant.revenue(date)
+    end
+  end
 end
