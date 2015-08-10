@@ -43,4 +43,9 @@ class ItemRepository
     rank_items = records.sort_by(&:revenue)
     rank_items.reverse[0..(x-1)]
   end
+
+  def most_items(x)
+    rank_items = records.sort_by(&:total_items)
+    rank_items.reverse[0..(x-1)]
+  end
 end

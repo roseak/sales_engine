@@ -27,12 +27,6 @@ class SalesEngine
     @invoice_repository      ||= InvoiceRepository.new(self)
   end
 
-  def self.build(*args)
-    engine = new(*args)
-    engine.startup
-    engine
-  end
-
   def startup
     merchant_repository.read_data(FileIO.read_csv("#{file_path}/merchants.csv"))
     customer_repository.read_data(FileIO.read_csv("#{file_path}/customers.csv"))

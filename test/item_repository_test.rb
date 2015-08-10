@@ -135,4 +135,9 @@ class ItemRepositoryTest < Minitest::Test
     x = 6
     assert_equal [1, 2, 4, 3, 6, 523], item_repo.most_revenue(x).map(&:id)
   end
+
+  def test_can_find_top_items_by_total_number_sold
+    x = 4
+    assert_equal [1, 2, 4, 3], item_repo.most_items(x).map(&:id)
+  end
 end
