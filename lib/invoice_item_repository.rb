@@ -39,4 +39,8 @@ class InvoiceItemRepository
   def find_item_by_item_id(item_id)
     sales_engine.find_item_by_item_id(item_id)
   end
+
+  # def succesful_invoice_items(item_id)
+  #   find_by_item_id(item_id).select
+  #   
 end

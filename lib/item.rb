@@ -28,4 +28,8 @@ class Item
   def merchant
     repository.find_merchant_by_merchant_id(merchant_id)
   end
+
+  def revenue
+    invoice_items.select(&:successful?).map(&:revenue).reduce(0, :+)
+  end
 end

@@ -130,4 +130,9 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 10, item_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, item_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
   end
+
+  def test_can_find_top_items_by_total_revenue
+    x = 3
+    assert_equal [1, 2, 4], item_repo.most_revenue(x).map(&:id)
+  end
 end

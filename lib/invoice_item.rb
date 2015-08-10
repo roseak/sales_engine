@@ -32,4 +32,8 @@ class InvoiceItem
   def revenue
     quantity * unit_price
   end
+
+  def successful_invoices
+    invoice.successful?
+  end
 end
