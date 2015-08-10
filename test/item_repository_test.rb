@@ -5,19 +5,17 @@ require './lib/file_io'
 require './lib/sales_engine'
 
 class ItemRepositoryTest < Minitest::Test
-  attr_reader :item_repo
+  attr_reader :item_repo, :items, :sales_engine
 
   def setup
     sales_engine = SalesEngine.new("./fixtures")
     sales_engine.startup
-    @item_repo = sales_engine.item_repository
-
-
-    # @items     = @item_repo.read_data(FileIO.read_csv("./fixtures/items.csv"))
+    @item_repo = ItemRepository.new(sales_engine)
+    @items     = @item_repo.read_data(FileIO.read_csv("./fixtures/items.csv"))
   end
 
   def test_read_data_returns_item_instances
-    seventh_item = item_repo[6]
+    seventh_item = items[6]
     assert_equal Item, seventh_item.class
     assert_equal 7, seventh_item.id
     assert_equal "Item Expedita Fuga", seventh_item.name
