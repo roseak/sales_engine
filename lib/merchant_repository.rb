@@ -29,16 +29,12 @@ class MerchantRepository
   end
 
   def most_revenue(x)
-    rank_merchants = records.sort_by do |merchant|
-      merchant.revenue
-    end
+    rank_merchants = records.sort_by(&:revenue)
     rank_merchants.reverse[0..(x-1)]
   end
 
   def most_items(x)
-    rank_merchants = records.sort_by do |merchant|
-      merchant.total_items
-    end
+    rank_merchants = records.sort_by(&:total_items)
     rank_merchants.reverse[0..(x-1)]
   end
 

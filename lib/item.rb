@@ -32,4 +32,8 @@ class Item
   def revenue
     repository.sales_engine.invoice_item_repository.revenue(id)
   end
+
+  def total_items
+    repository.sales_engine.invoice_item_repository.total_items(id)
+  end
 end

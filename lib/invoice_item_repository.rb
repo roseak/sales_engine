@@ -43,4 +43,8 @@ class InvoiceItemRepository
   def revenue(item_id)
     find_all_by_item_id(item_id).select(&:successful?).map(&:revenue).reduce(0, :+)
   end
+
+  def total_items(item_id)
+    find_all_by_item_id(item_id).select(&:successful?).map(&:quantity).reduce(0, :+)
+  end
 end
