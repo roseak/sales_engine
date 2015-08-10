@@ -23,7 +23,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_read_data_returns_all_instances
-   assert_equal 13, invoice_repo.all.length
+   assert_equal 16, invoice_repo.all.length
   end
 
   def test_all_returns_all_invoice_instances
@@ -78,7 +78,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_invoices_by_customer_id
-    assert_equal 11, invoice_repo.find_all_by_customer_id(1).length
+    assert_equal 12, invoice_repo.find_all_by_customer_id(1).length
     assert_equal 0, invoice_repo.find_all_by_customer_id(5).length
   end
 
@@ -88,7 +88,7 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_invoices_by_status
-    assert_equal 13, invoice_repo.find_all_by_status("shipped").length
+    assert_equal 16, invoice_repo.find_all_by_status("shipped").length
     assert_equal 0, invoice_repo.find_all_by_status("not shipped").length
   end
 

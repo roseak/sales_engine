@@ -23,7 +23,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_read_data_returns_all_instances
-    assert_equal 11, customer_repo.all.length
+    assert_equal 13, customer_repo.all.length
   end
 
   def test_all_returns_all_instances_of_customer_class
@@ -46,7 +46,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_nil_when_record_with_id_not_found
-    assert_equal nil, customer_repo.find_by_id(12)
+    assert_equal nil, customer_repo.find_by_id(19)
   end
 
   def test_can_find_customer_by_first_name
@@ -94,7 +94,7 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_can_find_all_customers_by_id
     assert_equal 1, customer_repo.find_all_by_id(2).length
-    assert_equal 0, customer_repo.find_all_by_id(12).length
+    assert_equal 0, customer_repo.find_all_by_id(19).length
   end
 
   def test_can_find_all_customers_by_first_name

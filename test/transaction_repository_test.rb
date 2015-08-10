@@ -24,7 +24,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_read_data_returns_all_instances
-   assert_equal 12, transaction_repo.all.length
+   assert_equal 16, transaction_repo.all.length
   end
 
   def test_all_returns_all_instances_of_transaction_class
@@ -90,7 +90,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_transactions_by_credit_card_number
-    assert_equal 3, transaction_repo.find_all_by_credit_card_number("4801647818676136").length
+    assert_equal 6, transaction_repo.find_all_by_credit_card_number("4801647818676136").length
     assert_equal 0, transaction_repo.find_all_by_created_at("4801647818999136").length
   end
 
@@ -100,7 +100,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_transactions_by_result
-    assert_equal 11, transaction_repo.find_all_by_result("success").length
+    assert_equal 13, transaction_repo.find_all_by_result("success").length
     assert_equal 0, transaction_repo.find_all_by_result("failure").length
   end
 
