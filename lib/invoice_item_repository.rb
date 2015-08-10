@@ -40,7 +40,7 @@ class InvoiceItemRepository
     sales_engine.find_item_by_item_id(item_id)
   end
 
-  # def succesful_invoice_items(item_id)
-  #   find_by_item_id(item_id).select
-  #   
+  def revenue(item_id)
+    find_all_by_item_id(item_id).select(&:successful?).map(&:revenue).reduce(0, :+)
+  end
 end

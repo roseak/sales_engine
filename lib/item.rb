@@ -30,6 +30,6 @@ class Item
   end
 
   def revenue
-    invoice_items.select(&:successful?).map(&:revenue).reduce(0, :+)
+    repository.sales_engine.invoice_item_repository.revenue(id)
   end
 end

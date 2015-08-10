@@ -33,7 +33,7 @@ class InvoiceItem
     quantity * unit_price
   end
 
-  def successful_invoices
+  def successful?
     invoice.successful?
   end
 end
