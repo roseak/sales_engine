@@ -48,6 +48,15 @@ class InvoiceItemRepository
     find_all_by_item_id(item_id).select(&:successful?).map(&:quantity).reduce(0, :+)
   end
 
+  def best_day(item_id)
+    sorted_invoice_items = find_all_by_item_id(item_id).select(&:successful?).group_by{|invoice_item| invoice_item.invoice.created_at}
+    result = sorted_invoice_items.map {|k, v| [k,v.map(&:revenue).reduce(0, :+) ] }.to_h
+  end
+  #
+  # some hash.map do |k,v|
+  #   [k,v.reduce(:+)]
+  # end.to_h
+
   def inspect
    "#<#{self.class} #{@all.size} rows>"
   end

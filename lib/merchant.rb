@@ -22,6 +22,7 @@ class Merchant
   end
 
   def revenue(date = nil)
+    require 'pry';binding.pry
     successful_invoices_on_date(date).map(&:revenue).reduce(0, :+)
   end
 
@@ -31,12 +32,8 @@ class Merchant
 
   def favorite_customer
     successful_invoices = invoices.select(&:successful?)
-    totaled_invoices = successful_invoices.group_by do |invoice|
-      invoice.customer_id
-    end
-    favorite_customer_id = totaled_invoices.max_by do |k, v|
-      v.count
-    end
+    totaled_invoices = successful_invoices.group_by(&:customer_id)
+    favorite_customer_id = totaled_invoices.max_by {|k, v| v.count}
     repository.find_customer_by_customer_id(favorite_customer_id[0])
   end
 
@@ -44,9 +41,7 @@ class Merchant
     pending_invoices = invoices.select do |invoice|
       invoice.successful? == false
     end
-    deadbeat_customers = pending_invoices.map do |invoice|
-      invoice.customer_id
-    end
+    deadbeat_customers = pending_invoices.map(&:customer_id)
   end
 
   private
