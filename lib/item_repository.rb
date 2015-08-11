@@ -38,4 +38,18 @@ class ItemRepository
   def find_merchant_by_merchant_id(merchant_id)
     sales_engine.find_merchant_by_merchant_id(merchant_id)
   end
+
+  def most_revenue(x)
+    rank_items = records.sort_by(&:revenue)
+    rank_items.reverse[0..(x-1)]
+  end
+
+  def most_items(x)
+    rank_items = records.sort_by(&:total_items)
+    rank_items.reverse[0..(x-1)]
+  end
+
+  def inspect
+   "#<#{self.class} #{@all.size} rows>"
+  end
 end

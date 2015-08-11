@@ -24,7 +24,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_read_data_returns_all_instances
-   assert_equal 10, transaction_repo.all.length
+   assert_equal 16, transaction_repo.all.length
   end
 
   def test_all_returns_all_instances_of_transaction_class
@@ -46,13 +46,12 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_can_find_transaction_by_id
     assert_equal 8, transaction_repo.find_by_id(8).id
-    assert_equal nil, transaction_repo.find_by_id(11)
-
+    assert_equal nil, transaction_repo.find_by_id(19)
   end
 
   def test_can_find_transaction_by_invoice_id
     assert_equal 4, transaction_repo.find_by_invoice_id(4).invoice_id
-    assert_equal nil, transaction_repo.find_by_invoice_id(13)
+    assert_equal nil, transaction_repo.find_by_invoice_id(19)
   end
 
   def test_can_find_transaction_by_credit_card_number
@@ -82,36 +81,36 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_can_find_all_transactions_by_id
     assert_equal 1, transaction_repo.find_all_by_id(2).length
-    assert_equal [], transaction_repo.find_all_by_id(11)
+    assert_equal 0, transaction_repo.find_all_by_id(19).length
   end
 
   def test_can_find_all_transactions_by_invoice_id
     assert_equal 1, transaction_repo.find_all_by_invoice_id(4).length
-    assert_equal [], transaction_repo.find_all_by_invoice_id(12)
+    assert_equal 0, transaction_repo.find_all_by_invoice_id(19).length
   end
 
   def test_can_find_all_transactions_by_credit_card_number
-    assert_equal 1, transaction_repo.find_all_by_credit_card_number("4801647818676136").length
-    assert_equal [], transaction_repo.find_all_by_created_at("4801647818999136")
+    assert_equal 6, transaction_repo.find_all_by_credit_card_number("4801647818676136").length
+    assert_equal 0, transaction_repo.find_all_by_created_at("4801647818999136").length
   end
 
   def test_can_find_all_transactions_by_credit_card_expiration_date
     assert_equal 1, transaction_repo.find_all_by_credit_card_expiration_date("0815").length
-    assert_equal [], transaction_repo.find_all_by_credit_card_expiration_date("")
+    assert_equal 0, transaction_repo.find_all_by_credit_card_expiration_date("").length
   end
 
   def test_can_find_all_transactions_by_result
-    assert_equal 10, transaction_repo.find_all_by_result("success").length
-    assert_equal [], transaction_repo.find_all_by_result("failure")
+    assert_equal 13, transaction_repo.find_all_by_result("success").length
+    assert_equal 0, transaction_repo.find_all_by_result("failure").length
   end
 
   def test_can_find_all_transactions_by_date_created
     assert_equal 2, transaction_repo.find_all_by_created_at("2012-03-27 14:54:09 UTC").length
-    assert_equal [], transaction_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC")
+    assert_equal 0, transaction_repo.find_all_by_created_at("2012-03-27 16:54:09 UTC").length
   end
 
   def test_can_find_all_transactions_by_date_updated
     assert_equal 2, transaction_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
-    assert_equal [], transaction_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC")
+    assert_equal 0, transaction_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
   end
 end

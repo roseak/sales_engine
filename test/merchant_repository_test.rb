@@ -2,12 +2,15 @@ require 'minitest/pride'
 require 'minitest/autorun'
 require './lib/merchant_repository'
 require './lib/file_io'
+require './lib/sales_engine'
 
 class MerchantRepositoryTest < Minitest::Test
-  attr_reader :merchant_repo, :merchants
+  attr_reader :merchant_repo, :merchants, :sales_engine
 
   def setup
-    @merchant_repo = MerchantRepository.new("sales_engine")
+    @sales_engine = SalesEngine.new("./fixtures")
+    sales_engine.startup
+    @merchant_repo = MerchantRepository.new(sales_engine)
     @merchants = @merchant_repo.read_data(FileIO.read_csv("./fixtures/merchants.csv"))
   end
 
@@ -21,7 +24,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_read_data_returns_all_instances
-   assert_equal 10, merchant_repo.all.length
+   assert_equal 11, merchant_repo.all.length
   end
 
   def test_all_returns_all_instances_of_merchant_class
@@ -43,7 +46,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_returns_nil_when_record_with_id_not_found
-    assert_equal nil, merchant_repo.find_by_id(11)
+    assert_equal nil, merchant_repo.find_by_id(19)
   end
 
   #TODO: repeat assertions for repo methods that are sad paths
@@ -79,7 +82,7 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_can_find_all_merchants_by_id
     assert_equal 1, merchant_repo.find_all_by_id(2).length
-    assert_equal 0, merchant_repo.find_all_by_id(11).length
+    assert_equal 0, merchant_repo.find_all_by_id(19).length
   end
 
   def test_can_find_all_merchants_by_name
@@ -88,12 +91,27 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_all_merchants_by_date_created
-    assert_equal 10, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 9, merchant_repo.find_all_by_created_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, merchant_repo.find_all_by_created_at("2012-04-27 14:53:59 UTC").length
   end
 
   def test_can_find_all_merchants_by_date_updated
-    assert_equal 8, merchant_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
+    assert_equal 9, merchant_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, merchant_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
+  end
+
+  def test_can_find_top_merchants_by_total_revenue
+    x = 3
+    assert_equal [1, 2, 4], merchant_repo.most_revenue(x).map(&:id)
+  end
+
+  def test_can_find_top_merchants_by_items_sold
+    x = 3
+    assert_equal [1, 2, 4], merchant_repo.most_items(x).map(&:id)
+  end
+
+  def test_can_find_total_revenue_for_date_across_all_merchants
+    date = Date.new(2012, 3, 7)
+    assert_equal [BigDecimal("751.07"), BigDecimal("720.76"), 0, 0, 0, 0, 0, 0, 0, 0, 0], merchant_repo.revenue(date)
   end
 end

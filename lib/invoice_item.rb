@@ -28,4 +28,12 @@ class InvoiceItem
   def item
     repository.find_item_by_item_id(item_id)
   end
+
+  def revenue
+    quantity * unit_price
+  end
+
+  def successful?
+    invoice.successful?
+  end
 end

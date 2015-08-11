@@ -36,4 +36,20 @@ class Invoice
   def merchant
     repository.find_merchant_by_merchant_id(merchant_id)
   end
+
+  def revenue
+    invoice_items.map(&:revenue).reduce(0, :+)
+  end
+
+  def total_items
+    invoice_items.map(&:quantity).reduce(0, :+)
+  end
+
+  def successful?
+    transactions.any?(&:successful?)
+  end
+
+  def on_date?(date)
+    Time.parse(created_at).to_date == date
+  end
 end

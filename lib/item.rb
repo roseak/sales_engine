@@ -28,4 +28,12 @@ class Item
   def merchant
     repository.find_merchant_by_merchant_id(merchant_id)
   end
+
+  def revenue
+    repository.sales_engine.invoice_item_repository.revenue(id)
+  end
+
+  def total_items
+    repository.sales_engine.invoice_item_repository.total_items(id)
+  end
 end

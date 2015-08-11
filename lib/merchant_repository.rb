@@ -23,4 +23,28 @@ class MerchantRepository
   def find_invoices_by_merchant_id(merchant_id)
     sales_engine.find_invoices_by_merchant_id(merchant_id)
   end
+
+  def find_customer_by_customer_id(customer_id)
+    sales_engine.find_customer_by_customer_id(customer_id)
+  end
+
+  def most_revenue(x)
+    rank_merchants = records.sort_by(&:revenue)
+    rank_merchants.reverse[0..(x-1)]
+  end
+
+  def most_items(x)
+    rank_merchants = records.sort_by(&:total_items)
+    rank_merchants.reverse[0..(x-1)]
+  end
+
+  def revenue(date)
+    records.map do |merchant|
+      merchant.revenue(date)
+    end
+  end
+
+  def inspect
+   "#<#{self.class} #{@all.size} rows>"
+  end
 end

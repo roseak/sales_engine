@@ -2,12 +2,15 @@ require 'minitest/pride'
 require 'minitest/autorun'
 require './lib/item_repository'
 require './lib/file_io'
+require './lib/sales_engine'
 
 class ItemRepositoryTest < Minitest::Test
-  attr_reader :item_repo, :items
+  attr_reader :item_repo, :items, :sales_engine
 
   def setup
-    @item_repo = ItemRepository.new("sales_engine")
+    sales_engine = SalesEngine.new("./fixtures")
+    sales_engine.startup
+    @item_repo = ItemRepository.new(sales_engine)
     @items     = @item_repo.read_data(FileIO.read_csv("./fixtures/items.csv"))
   end
 
@@ -96,15 +99,10 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal expected, item_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at
   end
 
-  def test_can_find_all_items_by_id
-    assert_equal 2, item_repo.find_all_by_id(4).length
-    assert_equal 0, item_repo.find_all_by_id(12).length
-  end
-
-  def test_can_find_all_items_by_name
-    assert_equal 2, item_repo.find_all_by_name("Item Nemo Facere").length
-    assert_equal 0, item_repo.find_all_by_name("David and Rose").length
-  end
+  # def test_can_find_all_items_by_name
+  #   assert_equal 1, item_repo.find_all_by_name("Item Nemo Facere").length
+  #   assert_equal 0, item_repo.find_all_by_name("David and Rose").length
+  # end
 
   def test_can_find_all_items_by_description
     assert_equal 2, item_repo.find_all_by_description("Sunt eum id eius magni consequuntur delectus veritatis. Quisquam laborum illo ut ab. Ducimus in est id voluptas autem.").length
@@ -129,5 +127,15 @@ class ItemRepositoryTest < Minitest::Test
   def test_can_find_all_items_by_date_updated
     assert_equal 10, item_repo.find_all_by_updated_at("2012-03-27 14:53:59 UTC").length
     assert_equal 0, item_repo.find_all_by_updated_at("2012-03-27 19:53:59 UTC").length
+  end
+
+  def test_can_find_top_items_by_total_revenue
+    x = 6
+    assert_equal [1, 2, 4, 3, 6, 523], item_repo.most_revenue(x).map(&:id)
+  end
+
+  def test_can_find_top_items_by_total_number_sold
+    x = 4
+    assert_equal [4, 2, 3, 1], item_repo.most_items(x).map(&:id)
   end
 end
