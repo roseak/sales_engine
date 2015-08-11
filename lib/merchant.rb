@@ -22,7 +22,6 @@ class Merchant
   end
 
   def revenue(date = nil)
-    require 'pry';binding.pry
     successful_invoices_on_date(date).map(&:revenue).reduce(0, :+)
   end
 
