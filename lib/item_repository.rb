@@ -48,4 +48,8 @@ class ItemRepository
     rank_items = records.sort_by(&:total_items)
     rank_items.reverse[0..(x-1)]
   end
+
+  def inspect
+   "#<#{self.class} #{@all.size} rows>"
+  end
 end

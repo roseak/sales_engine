@@ -72,4 +72,8 @@ module Repository
   def find_all_by_updated_at(updated_at)
     records.select{|record| record.updated_at == updated_at}
   end
+
+  def inspect
+   "#<#{self.class} #{@all.size} rows>"
+  end
 end

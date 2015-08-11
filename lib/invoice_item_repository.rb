@@ -47,4 +47,8 @@ class InvoiceItemRepository
   def total_items(item_id)
     find_all_by_item_id(item_id).select(&:successful?).map(&:quantity).reduce(0, :+)
   end
+
+  def inspect
+   "#<#{self.class} #{@all.size} rows>"
+  end
 end

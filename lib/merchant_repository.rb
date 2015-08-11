@@ -43,4 +43,8 @@ class MerchantRepository
       merchant.revenue(date)
     end
   end
+
+  def inspect
+   "#<#{self.class} #{@all.size} rows>"
+  end
 end
