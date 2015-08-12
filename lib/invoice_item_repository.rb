@@ -58,7 +58,6 @@ class InvoiceItemRepository
     end
   end
 
-
   def best_day(item_id)
     success_by_date(item_id).map{|k, v| [k,v.map(&:revenue).reduce(0, :+)]}.to_h
   end

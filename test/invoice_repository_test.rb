@@ -107,5 +107,5 @@ class InvoiceRepositoryTest < Minitest::Test
    merchant = MerchantRepository.new(load_csv("fixtures", "merchants.csv"), SalesEngine.new).find_by_id(26)
    i.create(customer: customer, merchant: merchant, status: "shipped", items:[item1, item2, item3])
    assert_equal 4438, i.all.last.id
- end
+  end
 end

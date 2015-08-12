@@ -24,13 +24,8 @@ class Customer
   end
 
   def favorite_merchant
-    successful_invoices = invoices.select(&:successful?)
-    totaled_invoices = successful_invoices.group_by do |invoice|
-      invoice.merchant_id
-    end
-    favorite_merchant_id = totaled_invoices.max_by do |k, v|
-      v.count
-    end
+    totaled_invoices = invoices.select(&:successful?).group_by(&:merchant_id)
+    favorite_merchant_id = totaled_invoices.max_by{|k, v| v.count}
     repository.find_merchant_by_merchant_id(favorite_merchant_id[0])
   end
 end

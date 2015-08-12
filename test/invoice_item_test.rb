@@ -17,7 +17,7 @@ class InvoiceItemTest < Minitest::Test
 
   def test_invoice_item_returns_an_instance_of_item
     invoice_item = invoice_item_repo.find_by_id(2)
-    item         = invoice_item.item
+    item = invoice_item.item
     assert_equal "Item Est Consequuntur", item.name
   end
 end

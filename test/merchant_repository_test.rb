@@ -45,8 +45,6 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal nil, merchant_repo.find_by_id(19)
   end
 
-  #TODO: repeat assertions for repo methods that are sad paths
-
   def test_can_find_merchant_by_name
     expected = "Osinski, Pollich and Koelpin"
     assert_equal expected, merchant_repo.find_by_name("Osinski, Pollich and Koelpin").name
