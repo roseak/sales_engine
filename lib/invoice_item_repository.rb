@@ -40,17 +40,27 @@ class InvoiceItemRepository
     sales_engine.find_item_by_item_id(item_id)
   end
 
+  def successful_invoice_items(item_id)
+    find_all_by_item_id(item_id).select(&:successful?)
+  end
+
   def revenue(item_id)
-    find_all_by_item_id(item_id).select(&:successful?).map(&:revenue).reduce(0, :+)
+    successful_invoice_items(item_id).map(&:revenue).reduce(0, :+)
   end
 
   def total_items(item_id)
-    find_all_by_item_id(item_id).select(&:successful?).map(&:quantity).reduce(0, :+)
+    successful_invoice_items(item_id).map(&:quantity).reduce(0, :+)
   end
 
+  def success_by_date(item_id)
+    successful_invoice_items(item_id).group_by do |invoice_item|
+      invoice_item.invoice.created_at
+    end
+  end
+
+
   def best_day(item_id)
-    sorted_invoice_items = find_all_by_item_id(item_id).select(&:successful?).group_by{|invoice_item| invoice_item.invoice.created_at}
-    result = sorted_invoice_items.map {|k, v| [k,v.map(&:revenue).reduce(0, :+) ] }.to_h
+    success_by_date(item_id).map{|k, v| [k,v.map(&:revenue).reduce(0, :+)]}.to_h
   end
 
   def create_invoice_items(items, new_invoice_id)

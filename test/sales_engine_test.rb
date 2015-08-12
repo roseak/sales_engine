@@ -1,6 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/sales_engine'
+require './test/test_helper'
 
 class SalesEngineTest < Minitest::Test
   attr_reader :engine

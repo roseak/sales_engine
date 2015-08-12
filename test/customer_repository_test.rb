@@ -1,7 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/customer_repository'
-require './lib/file_io'
+require './test/test_helper'
 
 class CustomerRepositoryTest < Minitest::Test
 

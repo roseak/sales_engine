@@ -1,8 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/item_repository'
-require './lib/file_io'
-require './lib/sales_engine'
+require './test/test_helper'
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :item_repo, :items, :sales_engine

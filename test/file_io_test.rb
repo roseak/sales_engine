@@ -1,7 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/file_io'
-require 'pry'
+require './test/test_helper'
 
 class FileIOTest < Minitest::Test
 

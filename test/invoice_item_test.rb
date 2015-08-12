@@ -1,9 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/invoice_item_repository'
-require './lib/invoice_item'
-require './lib/sales_engine'
-require './lib/file_io'
+require './test/test_helper'
 
 class InvoiceItemTest < Minitest::Test
   attr_reader :invoice_item_repo

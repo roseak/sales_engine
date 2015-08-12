@@ -21,7 +21,9 @@ class TransactionRepository
   end
 
   def find_by_credit_card_expiration_date(credit_card_expiration_date)
-    records.find{|record| record.credit_card_expiration_date == credit_card_expiration_date}
+    records.find do |record|
+      record.credit_card_expiration_date == credit_card_expiration_date
+    ends
   end
 
   def find_by_result(result)
@@ -33,7 +35,9 @@ class TransactionRepository
   end
 
   def find_all_by_credit_card_expiration_date(credit_card_expiration_date)
-    records.select{|record| record.credit_card_expiration_date == credit_card_expiration_date}
+    records.select do |record|
+      record.credit_card_expiration_date == credit_card_expiration_date
+    end
   end
 
   def find_all_by_result(result)
