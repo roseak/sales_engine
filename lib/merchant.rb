@@ -22,12 +22,11 @@ class Merchant
   end
 
   def revenue(date = nil)
-    require 'pry';binding.pry
     successful_invoices_on_date(date).map(&:revenue).reduce(0, :+)
   end
 
   def total_items
-    invoices.map(&:total_items).reduce(0, :+)
+    invoices.select(&:successful?).map(&:total_items).reduce(0, :+)
   end
 
   def favorite_customer
@@ -41,7 +40,7 @@ class Merchant
     pending_invoices = invoices.select do |invoice|
       invoice.successful? == false
     end
-    deadbeat_customers = pending_invoices.map(&:customer_id)
+    deadbeat_customers = pending_invoices.map{|invoice| invoice.customer}
   end
 
   private
