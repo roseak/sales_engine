@@ -38,4 +38,11 @@ class InvoiceTest < Minitest::Test
     merchant = invoice.merchant
     assert_equal "Schroeder-Jerde", merchant.name
   end
+
+  def test_charge_creates_a_new_transaction
+    invoice = invoice_repo.find_by_id(15)
+    first_transaction_count = invoice.transactions.count
+    invoice.charge(credit_card_number: "4444333322221111", credit_card_expiration_date: "10/13", result: "success")
+    assert_equal first_transaction_count.next, invoice.transactions.count
+  end
 end

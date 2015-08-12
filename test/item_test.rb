@@ -23,6 +23,6 @@ class ItemTest < Minitest::Test
 
   def test_revenue_can_filtered_by_date
     item = item_repo.find_by_id(1)
-    assert_equal "2012-03-27 14:54:09 UTC", item.best_day
+    assert_equal Date.new(2012, 3, 7), item.best_day
   end
 end

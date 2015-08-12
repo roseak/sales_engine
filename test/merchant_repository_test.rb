@@ -106,6 +106,6 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_can_find_total_revenue_for_date_across_all_merchants
     date = Date.new(2012, 3, 7)
-    assert_equal [BigDecimal("751.07"), BigDecimal("720.76"), 0, 0, 0, 0, 0, 0, 0, 0, 0], merchant_repo.revenue(date)
+    assert_equal BigDecimal("1471.83"), merchant_repo.revenue(date)
   end
 end
