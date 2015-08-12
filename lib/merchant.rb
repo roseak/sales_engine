@@ -26,7 +26,7 @@ class Merchant
   end
 
   def total_items
-    invoices.map(&:total_items).reduce(0, :+)
+    invoices.select(&:successful?).map(&:total_items).reduce(0, :+)
   end
 
   def favorite_customer
