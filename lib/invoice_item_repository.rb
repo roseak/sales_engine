@@ -57,6 +57,28 @@ class InvoiceItemRepository
   #   [k,v.reduce(:+)]
   # end.to_h
 
+  def create_invoice_items(items, new_invoice_id)
+    items.map do |item|
+      new_invoice_item = InvoiceItem.new({id: next_id,
+                item_id: item.id,
+                invoice_id: new_invoice_id,
+                quantity: 1,
+                unit_price: item.unit_price,
+                created_at: Time.new.strftime("%c %d, %Y"),
+                updated_at: Time.new.strftime("%c %d, %Y")},
+                self)
+      records << new_invoice_item
+    end
+  end
+
+  def next_id
+    if records.last.nil?
+      1
+    else
+      records.last.id.next
+    end
+  end
+
   def inspect
    "#<#{self.class} #{@all.size} rows>"
   end

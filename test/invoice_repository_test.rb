@@ -101,4 +101,8 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 1, invoice_repo.find_all_by_updated_at("2012-03-25 09:54:09 UTC").length
     assert_equal 0, invoice_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
   end
+
+  def test_can_create_
+    #code
+  end
 end
