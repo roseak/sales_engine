@@ -44,6 +44,30 @@ class TransactionRepository
     sales_engine.find_invoice_by_invoice_id(invoice_id)
   end
 
+  def charge(payment_data, invoice_id)
+    credit_card_number = payment_data[:credit_card_number]
+    credit_card_expiration_date = payment_data[:credit_card_expiration_date]
+    result = payment_data[:result]
+    new_transaction = Transaction.new(
+        {id: next_id,
+         invoice_id: invoice_id,
+         credit_card_number: credit_card_number,
+         credit_card_expiration_date: credit_card_expiration_date,
+         result: result,
+         created_at: Time.now.strftime("%c %d, %Y"),
+         updated_at: Time.now.strftime("%c %d, %Y")},
+         self)
+    records << new_transaction
+  end
+
+  def next_id
+    if records.last.nil?
+      1
+    else
+      records.last.id.next
+    end
+  end
+
   def inspect
    "#<#{self.class} #{@all.size} rows>"
   end

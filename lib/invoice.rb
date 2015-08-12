@@ -52,4 +52,8 @@ class Invoice
   def on_date?(date)
     Time.parse(created_at).to_date == date
   end
+
+  def charge(payment_data)
+    repository.charge(payment_data, id)
+  end
 end
