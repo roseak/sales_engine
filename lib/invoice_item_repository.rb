@@ -52,10 +52,6 @@ class InvoiceItemRepository
     sorted_invoice_items = find_all_by_item_id(item_id).select(&:successful?).group_by{|invoice_item| invoice_item.invoice.created_at}
     result = sorted_invoice_items.map {|k, v| [k,v.map(&:revenue).reduce(0, :+) ] }.to_h
   end
-  #
-  # some hash.map do |k,v|
-  #   [k,v.reduce(:+)]
-  # end.to_h
 
   def create_invoice_items(items, new_invoice_id)
     items.map do |item|

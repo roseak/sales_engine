@@ -79,4 +79,8 @@ class SalesEngine
   def create_invoice_items(items, new_invoice_id)
     invoice_item_repository.create_invoice_items(items, new_invoice_id)
   end
+
+  def charge(payment_data, invoice_id)
+    transaction_repository.charge(payment_data, invoice_id)
+  end
 end

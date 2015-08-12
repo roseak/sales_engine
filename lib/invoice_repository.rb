@@ -73,6 +73,10 @@ class InvoiceRepository
     end
   end
 
+  def charge(payment_data, id)
+    sales_engine.charge(payment_data, id)
+  end
+
   def inspect
    "#<#{self.class} #{@all.size} rows>"
   end

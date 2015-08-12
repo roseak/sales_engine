@@ -102,7 +102,13 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 0, invoice_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
   end
 
-  def test_can_create_
-    #code
-  end
+  def test_create_makes_invoices
+   item1 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
+   item2 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
+   item3 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(1)
+   customer = CustomerRepository.new(load_csv("fixtures", "customers.csv"), SalesEngine.new).find_by_id(1)
+   merchant = MerchantRepository.new(load_csv("fixtures", "merchants.csv"), SalesEngine.new).find_by_id(26)
+   i.create(customer: customer, merchant: merchant, status: "shipped", items:[item1, item2, item3])
+   assert_equal 4438, i.all.last.id
+ end
 end
