@@ -26,7 +26,7 @@ class Invoice
   end
 
   def items
-    invoice_items.map {|invoice_item| invoice_item.item}
+    invoice_items.map(&:item)
   end
 
   def customer
