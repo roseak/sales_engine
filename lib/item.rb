@@ -37,7 +37,11 @@ class Item
     repository.sales_engine.invoice_item_repository.total_items(id)
   end
 
+  def best_days(id)
+    repository.sales_engine.invoice_item_repository.best_day(id)
+  end
+
   def best_day
-    Date.parse(repository.sales_engine.invoice_item_repository.best_day(id).max_by{|k, v| v}[0])
+    Date.parse(best_days(id).max_by{|k, v| v}[0])
   end
 end

@@ -1,9 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/merchant_repository'
-require './lib/merchant'
-require './lib/sales_engine'
-require './lib/file_io'
+require './test/test_helper'
 
 class MerchantTest < Minitest::Test
   attr_reader :merchant_repo

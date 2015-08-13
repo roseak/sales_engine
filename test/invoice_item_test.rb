@@ -1,9 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/invoice_item_repository'
-require './lib/invoice_item'
-require './lib/sales_engine'
-require './lib/file_io'
+require './test/test_helper'
 
 class InvoiceItemTest < Minitest::Test
   attr_reader :invoice_item_repo
@@ -22,7 +17,7 @@ class InvoiceItemTest < Minitest::Test
 
   def test_invoice_item_returns_an_instance_of_item
     invoice_item = invoice_item_repo.find_by_id(2)
-    item         = invoice_item.item
+    item = invoice_item.item
     assert_equal "Item Est Consequuntur", item.name
   end
 end

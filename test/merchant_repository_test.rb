@@ -1,8 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/merchant_repository'
-require './lib/file_io'
-require './lib/sales_engine'
+require './test/test_helper'
 
 class MerchantRepositoryTest < Minitest::Test
   attr_reader :merchant_repo, :merchants, :sales_engine
@@ -48,8 +44,6 @@ class MerchantRepositoryTest < Minitest::Test
   def test_returns_nil_when_record_with_id_not_found
     assert_equal nil, merchant_repo.find_by_id(19)
   end
-
-  #TODO: repeat assertions for repo methods that are sad paths
 
   def test_can_find_merchant_by_name
     expected = "Osinski, Pollich and Koelpin"
@@ -112,6 +106,6 @@ class MerchantRepositoryTest < Minitest::Test
 
   def test_can_find_total_revenue_for_date_across_all_merchants
     date = Date.new(2012, 3, 7)
-    assert_equal [BigDecimal("751.07"), BigDecimal("720.76"), 0, 0, 0, 0, 0, 0, 0, 0, 0], merchant_repo.revenue(date)
+    assert_equal BigDecimal("1471.83"), merchant_repo.revenue(date)
   end
 end

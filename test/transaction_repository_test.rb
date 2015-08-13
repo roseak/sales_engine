@@ -1,7 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/transaction_repository'
-require './lib/file_io'
+require './test/test_helper'
 
 class TransactionRepositoryTest < Minitest::Test
   attr_reader :transaction_repo, :transactions
@@ -113,4 +110,14 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 2, transaction_repo.find_all_by_updated_at("2012-03-27 14:54:09 UTC").length
     assert_equal 0, transaction_repo.find_all_by_updated_at("2012-02-27 14:54:09 UTC").length
   end
+
+  # def test_charge_creates_a_new_transaction
+  #   sales_engine = SalesEngine.new("./fixtures")
+  #   data = sales_engine.startup
+  #   item = sales_engine.item_repository.find_by_id(1)
+  #   customer = sales_engine.customer_repository.find_by_id(1)
+  #   merchant = sales_engine.merchant_repository.find_by_id(1)
+  #   invoice = sales_engine.invoice_repository.create(customer: customer, merchant: merchant, status: "shipped", items:[item])
+  #   assert_equal invoice, sales_engine.invoice_repository.all.last
+  # end
 end

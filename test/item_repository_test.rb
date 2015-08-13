@@ -1,8 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/item_repository'
-require './lib/file_io'
-require './lib/sales_engine'
+require './test/test_helper'
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :item_repo, :items, :sales_engine
@@ -10,8 +6,8 @@ class ItemRepositoryTest < Minitest::Test
   def setup
     sales_engine = SalesEngine.new("./fixtures")
     sales_engine.startup
-    @item_repo = ItemRepository.new(sales_engine)
-    @items     = @item_repo.read_data(FileIO.read_csv("./fixtures/items.csv"))
+    @item_repo   = ItemRepository.new(sales_engine)
+    @items       = @item_repo.read_data(FileIO.read_csv("./fixtures/items.csv"))
   end
 
   def test_read_data_returns_item_instances
@@ -98,11 +94,6 @@ class ItemRepositoryTest < Minitest::Test
     expected = "2012-03-27 14:53:59 UTC"
     assert_equal expected, item_repo.find_by_updated_at("2012-03-27 14:53:59 UTC").updated_at
   end
-
-  # def test_can_find_all_items_by_name
-  #   assert_equal 1, item_repo.find_all_by_name("Item Nemo Facere").length
-  #   assert_equal 0, item_repo.find_all_by_name("David and Rose").length
-  # end
 
   def test_can_find_all_items_by_description
     assert_equal 2, item_repo.find_all_by_description("Sunt eum id eius magni consequuntur delectus veritatis. Quisquam laborum illo ut ab. Ducimus in est id voluptas autem.").length

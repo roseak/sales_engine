@@ -1,7 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/invoice_repository'
-require './lib/file_io'
+require './test/test_helper'
 
 class InvoiceRepositoryTest < Minitest::Test
   attr_reader :invoice_repo, :invoices
@@ -103,12 +100,12 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_create_makes_invoices
-   item1 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
-   item2 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(539)
-   item3 = ItemRepository.new(load_csv("fixtures","items.csv"),SalesEngine.new).find_by_id(1)
-   customer = CustomerRepository.new(load_csv("fixtures", "customers.csv"), SalesEngine.new).find_by_id(1)
-   merchant = MerchantRepository.new(load_csv("fixtures", "merchants.csv"), SalesEngine.new).find_by_id(26)
-   i.create(customer: customer, merchant: merchant, status: "shipped", items:[item1, item2, item3])
-   assert_equal 4438, i.all.last.id
- end
+    sales_engine = SalesEngine.new("./fixtures")
+    data = sales_engine.startup
+    item = sales_engine.item_repository.find_by_id(1)
+    customer = sales_engine.customer_repository.find_by_id(1)
+    merchant = sales_engine.merchant_repository.find_by_id(1)
+    invoice = sales_engine.invoice_repository.create(customer: customer, merchant: merchant, status: "shipped", items:[item])
+    assert_equal invoice, sales_engine.invoice_repository.all.last
+  end
 end

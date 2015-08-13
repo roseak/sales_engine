@@ -1,9 +1,4 @@
-require 'minitest/pride'
-require 'minitest/autorun'
-require './lib/customer_repository'
-require './lib/customer'
-require './lib/sales_engine'
-require './lib/file_io'
+require './test/test_helper'
 
 class CustomerTest < Minitest::Test
   attr_reader :customer_repo

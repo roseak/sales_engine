@@ -30,8 +30,10 @@ class SalesEngine
   def startup
     merchant_repository.read_data(FileIO.read_csv("#{file_path}/merchants.csv"))
     customer_repository.read_data(FileIO.read_csv("#{file_path}/customers.csv"))
-    transaction_repository.read_data(FileIO.read_csv("#{file_path}/transactions.csv"))
-    invoice_item_repository.read_data(FileIO.read_csv("#{file_path}/invoice_items.csv"))
+    transaction_repository.
+      read_data(FileIO.read_csv("#{file_path}/transactions.csv"))
+    invoice_item_repository.
+      read_data(FileIO.read_csv("#{file_path}/invoice_items.csv"))
     item_repository.read_data(FileIO.read_csv("#{file_path}/items.csv"))
     invoice_repository.read_data(FileIO.read_csv("#{file_path}/invoices.csv"))
   end
