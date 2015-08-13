@@ -40,7 +40,7 @@ class Merchant
     pending_invoices = invoices.select do |invoice|
       invoice.successful? == false
     end
-    deadbeat_customers = pending_invoices.map{|invoice| invoice.customer}
+    pending_invoices.map{|invoice| invoice.customer}
   end
 
   private

@@ -11,7 +11,7 @@ class MerchantTest < Minitest::Test
 
   def test_it_returns_a_collection_of_items_associated_with_merchant_id
     merchant = merchant_repo.find_by_id(1)
-    items    = merchant.items
+    items = merchant.items
     assert_equal 10, items.count
   end
 
@@ -52,11 +52,5 @@ class MerchantTest < Minitest::Test
   def test_can_return_collection_of_customers_with_pending_invoices
     merchant = merchant_repo.find_by_id(11)
     assert_equal 1, merchant.customers_with_pending_invoices.length
-  end
-
-  def test_customer_does_not_have_pending_invoices_if_all_transactions_are_not_unsuccessful
-    skip
-    merchant = merchant_repo.find_by_id(11)
-    assert_equal nil, merchant.customers_with_pending_invoices
   end
 end
